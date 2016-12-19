@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var a = 10;
+
+    //与外界隔离的独立作用域被称为闭包，使用函数实现该功能称为函数闭包
+    //IIFE ()()
+    (function(){
+        var a = 1;
+        function hello() {
+            console.log("Hello world");
+        }
+        hello();
+        console.log(a);
+    })()
+</script>
+</body>
+</html>
