@@ -1,0 +1,119 @@
+<html>
+<head></head>
+<body>
+
+<script>
+    //变量
+    var a = 10;
+    var b = 20;
+    //数据类型
+    var str = "hello";
+    var number = 10;
+    var bool = true;
+    var arr = ["apple", "orange"];
+    //数学运算 + - * / %
+    console.log(a + b);
+    //赋值运算 + - * / %
+    a ++;//自增
+    a --;//自减
+    a += 10; // 自增10
+    //逻辑运算
+    a && b; //两个都为真则为真，有一个为假则为假, 这个也能做简单的判断使用
+    a || b; //一个为真则结果为真
+    !a //取反
+    //关系运算 > < >= <= != == === !==
+    //位运算 >> 右移，将数转换为二进制，
+    //然后向右移一位，相当于除以2；
+    // << 左移，将数转换为二进制，然后乘以2
+    //三元运算符，相当于简化的if
+    var max = a > b ? a : b;
+    //流程控制，循环，分支，顺序
+    if (max > 0) {//表达式只要能够返回一个bool值
+        console.log();
+    } else if( a > 0 ) {
+        console.log();
+    } else {
+        console.log('other');
+    }
+    switch(max) {
+        case 10:
+            console.log();
+            break;
+        default:
+            console.log("other");
+    }
+    for(var i=0; i<10; i++) {
+        console.log(i);
+    }
+    var i = 0;
+    while( i < 10 ) {
+        console.log(i);
+        i++;
+    }
+    //循环需要满足哪些条件
+    /*
+     循环变量初始化，循环条件进行判断，对循环变量
+     进行更新， 循环体
+     */
+    var i = 0;
+    do {
+        console.log(i);
+        i++;
+    } while(i<10);
+    //函数
+    function add(a, b) {//函数声明时的参数只是用来占位，表示形式参数
+        var c = 5;	//局部变量，只能在函数内部使用
+        return a + b;
+    }
+    var result = add(a, b); //调用的时候传递的参数是实际参数
+    console.log(result);
+
+    var name = "max"; //全局变量
+
+
+    //数组
+    var arr = ["apple"];//method 1
+    var arr = [];//method 2
+    var arr = new Array("apple"); //method 3
+    var arr = new Array();//method 4
+    //遍历
+    for(var i=0; i<arr.length; i++) {
+        console.log(arr[i]);
+    }
+    for (var item in arr) {
+        console.log(item);
+    }
+    //将数组转换为字符串
+    console.log(arr.toString());
+    console.log(arr.join(""));//数组用某个连接符转换为字符串
+    //排序, 冒泡和插入
+    //冒泡排序
+    var arr = [11, 3, 2, 5, 13];
+    var temp;
+    for (var i=0; i < arr.length; i++) {
+        for (var j = 0; j < arr.length; j++) {
+            if (arr[j] < arr[j+1]) {
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+    console.log("-----------");
+    for(var item in arr) {
+        console.log(arr[item]);
+    }
+    var arr = [];
+    arr["name"] = "max";
+    arr["age"] = 10;
+    console.log(arr);
+
+    //打印字符串，对象
+    console.log(console);
+    console.warn("config error");
+    console.info("info");
+
+
+</script>
+</body>
+</html>
