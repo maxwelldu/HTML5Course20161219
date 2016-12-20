@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--onload是当文档加载完成之后执行-->
+<!--onload事件，如果咱们写两个，只会执行第一个onload事件里面的函数-->
+<!--onload事件里面写多个函数，会按顺序执行-->
+<body onload="f()" >
+
+<script>
+    /**
+     * 两个同名函数，第二个函数会覆盖之前的函数
+     */
+    function init() {
+        console.log(2);
+    }
+    function f(){
+        console.log(1);
+    }
+</script>
+</body>
+</html>

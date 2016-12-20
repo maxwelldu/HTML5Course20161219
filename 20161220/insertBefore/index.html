@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="parentElement">
+    <span id="childElement">foo bar</span>
+</div>
+
+<script>
+    var newNode = document.createElement("span");
+    newNode.innerHTML = "New Node";
+
+   var parentDiv = document.querySelector("#parentElement");
+   var sp2 = document.querySelector("#childElement");
+   parentDiv.insertBefore(newNode, sp2);
+</script>
+</body>
+</html>
