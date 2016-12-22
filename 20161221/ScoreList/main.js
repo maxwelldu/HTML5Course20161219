@@ -12,10 +12,10 @@
     }
 
     var scoreList = [
-        {name:"苗焱", score:10},
-        {name:"李创琪", score:10},
-        {name:"魏巍", score:10},
-        {name:"盛燕斌", score:10}
+        {name:"苗焱", score:1},
+        {name:"李创琪", score:2},
+        {name:"魏巍", score:3},
+        {name:"盛燕斌", score:2}
     ];
     //根据这个数组对象，创建出一个表格出来，
     // 并放到id为container的div容器中
