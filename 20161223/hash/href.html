@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="#type=text">当前页面跳转</a>
+<a href="#type=image">当前页面跳转</a>
+<div style="height:500px; background-color: darkgray"></div>
+<a name="max">跳到当前页面的中部了</a>
+<div style="height:500px; background-color: darkgray"></div>
+<script>
+    (function(){
+        window.onhashchange = function () {
+           console.log(location.hash);
+        }
+    })()
+</script>
+</body>
+</html>

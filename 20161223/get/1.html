@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>hash的使用</title>
+</head>
+<body>
+<a href="#type=text&name=abc">显示内容</a>
+<a href="#type=imge&name=def">显示图片内容</a>
+<div id="contain">
+
+</div>
+</body>
+<script type="text/javascript">
+    (function(){
+        window.onhashchange=function(){
+            changePage();
+        }
+        changePage();
+
+        function changePage(){
+            //获取hashde的值并赋给下面的hash变量(substr(1):从第一个开始截取字符串；)
+            var hash=location.hash.substr(1);
+            //蒋hash字符串裁短(split("&"))；
+            var strings=hash.split("&");
+            console.log(strings);
+            var hashObj={};
+            for(var i=0;i<strings.length;i++){
+                var item=strings[i];
+                var items=item.split("=");
+                var key=items[0];
+                hashObj[key]=items[1];
+            }
+            console.log(hashObj);
+            console.log(hashObj.type);
+            switch(hashObj.type){
+                case"text":
+                    document.querySelector("#contain").innerHTML="不要发黄图";
+                    break;
+                case"imge":
+                    document.querySelector("#contain").innerHTML="<img src='img/02.jpg'/>"
+                    break;
+            }
+        }
+    })()
+</script>
+</html>
