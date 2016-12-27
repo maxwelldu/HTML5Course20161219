@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{ margin: 0; padding: 0;}
+        p {
+            margin: 1px;
+            padding:0; width: 50px; height: 50px; background-color: gray; }
+        .red { background-color: red; }
+        .green { background-color: green; }
+    </style>
+</head>
+<body>
+    <button id="to-green">变绿</button>
+    <button id="to-red">变红</button>
+    <button id="to-empty">去除</button>
+    <button id="btn">你敢点我吗</button>
+    <a href="">a1</a>
+    <a href="">a2</a>
+    <img src="" alt="">
+    <img src="" alt="">
+    <div>菜单</div>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+
+<script src="jquery-3.1.1.js"></script>
+<script>
+        //$("p").css("background-color", "red");
+//        $("p:first").css("background-color", "red");
+//        $("p:last").css("background-color", "red");
+//        $("p:eq(2)").css("background-color", "red");
+//        $("p:lt(2)").css("background-color", "red");
+//        $("p:gt(2)").css("background-color", "red");
+//        $("p:odd").css("background-color", "red");
+        $("p:even").css("background-color", "red");
+
+        var w = $("p").css("width");
+        console.log(w);
+        console.log(typeof w);
+
+        $("#btn").click(function(){
+            $("p:first").css("width", "+=20");
+//            $("p").toggle(2000);
+//            $("p").hide();
+//            $("p").slideDown(2000);
+//            $("p").slideUp(2000);
+//            $("p").slideToggle(2000);
+//            $("p").fadeIn();
+//            $("p").fadeOut();
+//            $("p").fadeToggle();
+//            $("p").fadeTo(400, 0.6);
+        })
+
+
+    $("div").mouseenter(function(){
+        //鼠标进入的时候做的事情
+        $("p").slideDown();
+    })
+    $("div").mouseleave(function(){
+        //鼠标移开的时候做的事情
+        $("p").slideUp();
+    })
+
+    $("#to-green").click(function () {
+        $("button").addClass("green");
+    })
+    $("#to-red").click(function () {
+        $("button").addClass("red");
+    })
+    $("#to-empty").click(function () {
+//        $("button").removeClass("red");
+        $("button").removeClass("green");
+    })
+
+    $("a").attr("href", "http://www.163.com");
+    $("a").attr("target", "_blank");
+
+    $("img").attr("src", "2.png");
+
+</script>
+
+</body>
+</html>

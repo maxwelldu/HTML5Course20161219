@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<p></p>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<script>
+    var p = document.getElementsByTagName("p")[0];
+    p.innerHTML = "明星就是事多";
+    p.className = "red";
+    p.style.backgroundColor = "gray";
+    p.onclick = function(){
+        alert("点我干嘛");
+    }
+
+    /*
+    var divs = document.getElementsByTagName("div");
+    for (var i = 0; i < divs.length; i++) {
+        var obj = divs[i];
+        obj.innerHTML = i;
+    }
+    */
+
+
+
+</script>
+</body>
+</html>
