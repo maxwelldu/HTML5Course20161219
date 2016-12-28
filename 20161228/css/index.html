@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function css() {
+        var ar1 = arguments[0];
+        switch (typeof ar1) {
+            case "object":
+                console.log("1");
+                break;
+            case "string":
+                console.log("2");
+                break;
+        }
+    }
+
+    css("color", "red");
+    css({
+        "color" : "red",
+        "backgroundColor" : "gray"
+    });
+
+
+</script>
+</body>
+</html>

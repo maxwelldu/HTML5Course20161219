@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div,p,ul,ol,span {
+            border: 1px dashed gray;
+        }
+        div{margin-top:10px}
+    </style>
+</head>
+<body>
+    <div>
+        自己的父亲
+        <p>自己</p>
+        <span>自己的兄弟</span>
+    </div>
+    <div>
+        父亲的兄弟
+        <ul>
+            <li>父亲的兄弟的儿子</li>
+            <li>父亲的兄弟的儿子</li>
+            <li>父亲的兄弟的儿子</li>
+            <li>父亲的兄弟的儿子</li>
+        </ul>
+    </div>
+    <div>
+        父亲的兄弟
+        <ol>
+            <li>父亲的兄弟的儿子</li>
+            <li>父亲的兄弟的儿子</li>
+            <li>父亲的兄弟的儿子</li>
+        </ol>
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script>
+        $("p").click(function(){
+            $(this).css("background-color", "red")
+                .siblings().css("background-color", "blue")
+                .parent().css("background-color", "#ccc")
+                .siblings().css("background-color", "green")
+                .children().css("background-color", "yellow")
+            ;
+        })
+    </script>
+</body>
+</html>

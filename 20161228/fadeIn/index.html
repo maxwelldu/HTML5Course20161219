@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            width: 80px;
+            height:80px;
+            position: absolute;
+            display: none;
+        }
+        .n1 { display: block; }
+    </style>
+</head>
+<body>
+<button id="btn">点我试试</button>
+<div></div>
+<img src="01.jpg" alt="" class="n1">
+<img src="02.jpg" alt="">
+<img src="03.jpg" alt="">
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script>
+    var index = 0;
+    $("#btn").click(function () {
+        $("img").eq(index).fadeOut();
+        index++;
+        if (index>=$("img").size()) {
+            index = 0;
+        }
+        $("img").eq(index).fadeIn();
+    })
+</script>
+</body>
+</html>

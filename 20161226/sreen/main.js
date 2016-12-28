@@ -5,6 +5,6 @@
 (function () {
   console.log(screen);
   screen.onorientationchange = function() {
-    console.log(creen);
+    console.log(screen);
   }
 })()

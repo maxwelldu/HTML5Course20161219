@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p, span { width: 80px; height: 80px; background-color: orange; display: block; position: absolute; }
+        span {background: yellowgreen; top:100px}
+        #div {
+            width: 90px;
+            height: 90px;
+            background-color: greenyellow;
+            position: fixed;
+        }
+    </style>
+</head>
+<body>
+
+<div id="div">
+    <p> </p>
+    <span></span>
+    <p> </p>
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script>
+    $("p").click(function(event){
+//        $(this).animate({ "left": 100}, 500);
+        event.stopPropagation();
+//        $(this).parent().animate({ "left": 100}, 500);
+//        $(this).siblings().animate({"left": 100}, 500);
+        $(this).siblings("p").animate({"left": 100}, 500);
+    });
+
+    $("div").click(function(){
+//        $(this).children().fadeOut();
+        $(this).children("span").fadeOut();
+    });
+</script>
+</body>
+</html>

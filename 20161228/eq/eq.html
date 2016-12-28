@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="zhouzhou">
+    <p>我没想红</p>
+    <p class="panpan">不红</p>
+    <p class="lele">不红</p>
+    <p>不红</p>
+</div>
+<div class="ccc">
+    <p>不红</p>
+    <p class="xuxu">我想红！</p>
+    <p>不红</p>
+    <p>不红</p>
+    <p class="xuxu">不红</p>
+</div>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script>
+//    $("p:eq(5)").css({"background-color":"red"});
+//    $("p").siblings(".xuxu").eq(0).css({"background-color":"red"});
+//    $("p").siblings(".xuxu:first").css({"background-color":"red"});
+//    $("div.ccc>p.xuxu").eq(0).css({"background-color":"red"});
+//    $("div.ccc>p:eq(1)").css({"background-color":"red"});
+
+    $("p").click(function () {
+       console.log($(this).index());
+    });
+    $(".xuxu").click(function () {
+        console.log($(this).index());
+    })
+</script>
+</body>
+</html>

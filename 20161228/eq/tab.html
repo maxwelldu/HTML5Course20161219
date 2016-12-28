@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .tab {
+            width: 240px;
+            height: 50px;
+        }
+        .tab_menu li {
+            float: left;
+            text-align: center;
+            list-style: none;
+            background: #f1f1f1;
+            border:1px solid #898989;
+            margin-right:4px;
+            padding:1px 6px;
+            border-bottom:none;
+            cursor: pointer;
+        }
+        .tab_box {
+            clear: both;
+            height:100px;
+            border:1px solid #898989;
+        }
+        .hide {
+            display: none;
+        }
+        .tab_menu li.selected {
+            color: #ffffff;
+            background-color: #6d84b4;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab">
+        <div class="tab_menu">
+            <ul>
+                <li class="selected">时事</li>
+                <li>体育</li>
+                <li>娱乐</li>
+            </ul>
+        </div>
+        <div class="tab_box">
+            <div>时事新闻</div>
+            <div class="hide">体育新闻</div>
+            <div class="hide">娱乐新闻</div>
+        </div>
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script>
+        $(".tab_menu ul li").mouseenter(function () {
+            //一句话把这个选项卡给完成
+            //1.鼠标放在菜单上面时修改css属性，移除之前的
+//            selected 选项，添加新的selected选项
+//            2.隐藏之前的div层，显示对应的div层
+$(this).addClass("selected")//给当前元素添加selectd类样式
+    .siblings().removeClass("selected")//给兄弟元素移除selected类样式
+    .parent().parent().next()//找到父元素ul，父元素div的下一个兄弟元素
+    .children().eq($(this).index())//子元素中和当前元素序号对应的div
+    .show().siblings().hide();//让其他内容元素隐藏
+        });
+    </script>
+</body>
+</html>

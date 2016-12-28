@@ -1,0 +1,375 @@
+一、复习一下
+jQuery是一个JavaScript Library, JavaScript库，所以jQuery
+不是一门独立的语言，是JS的增强，说白了就是就是封装了$()函数
+，让选择元素变得非常方便，然后获得的jQuery对象的许多方法，
+比如css(), html(), slideUp(), hide(), show(), fadeIn(),
+addClass(), removeClass(), .click(), .on('click',function(){})
+.eq()。JS中的语法var, function, if, for这些都没有变化的！
+
+轮子，封装好的一个方法就好像是一个轮子，我们有封装动画
+的方法，还有封闭DOM操作创建的方法也是一个轮子, 多个轮子
+放在一块儿，给我们使用，这样的库我们叫他为框架
+
+jQuery哲学思想：少的更少，做的更多，DOM效果的王者，解决
+了兼容问题！
+所以：我们开发canvas或者nodejs，jquery帮不上任何忙的
+jQuery仅仅能干的事，就是操作DOM， 获得HTML元素，改变元素
+的属性，样式，节点操作。
+
+$() 实际上简化了获得元素的方法，可以用任意选择器选择：
+$("#box ul li a")
+本质是一个$()函数，会解析你传进来的string, 用正则表达式
+识别你的#， .等这些符号，转化成我们的
+Document.getElementById()
+Document.getElementsByTagName()
+
+这个返回是jQuery对象，这是一个类数组对象，把所有的原生
+JS对象，存放在对象的索引里面，所以我们的jQuery对象-->
+原生对象，加方括号：
+$("#box ul li a")[0] //获取选中元素的第一个元素（JS对象）
+$("#box ul li a")[1]
+$("#box ul li a")[2]
+
+原生JS对象如果想成为 jQuery对象，那么用$()一下
+var box = document.getElementById("box");
+var $box = $(box);
+$box.css("color", "red");
+box.style.color = "red";
+
+原生JS对象的属性方法，jquery对象是不能用的
+反过来也是，jquery对象的属性和方法，原生JS也是不能用的
+//jQuery添加类
+$("#box").addClass("cur");
+//原生对象
+document.getElementById("box").className = "cur";
+
+那么不管选择了几个元素，都只返回一个jquery对象，那么对象个数
+$().length;
+$().size();
+
+jquery内置了一些所谓的选择器伪类：
+$("li:eq(0)") // equal
+$("li:lt(0)") //less than
+$("li:gt(0)") //greater than
+$("li:first")
+$("li:last")
+$("li:odd")
+$("li:even")
+特别的，要知道eq()是可以提炼出来：
+$("li").eq(4)
+
+选择完毕之后，就开始做事！所以jquery对象的能力，我们要知道。
+所有的方法，都是批量！
+
+我们先学习的是css函数，改变元素的CSS样式的，批量改变。
+$().css("k", v);
+$().css({
+    "k": v,
+    "k": v,
+    "k": v
+});
+
+单位的事儿：
+$().css("width", 500);
+$().css("width", "500px");
++=的事儿：
+$().css("width", "+=500px")
+还可以得到计算后的样式：
+$().css("width")
+
+show(), hide(), slideDown(), slideUp(), fadeIn(),
+fadeOut()
+show(), hide() 非常直接的显示隐藏，没有任何动画。里面
+可以写时间，会添加动画
+<script type="text/javascript">
+$("div:first").mouseenter(function(){
+    $("div:last").show(1000);
+});
+$("div:first").mouseleave(function(){
+    $("div:last").hide(1000);
+});
+</script>
+这些方法都是从display:none为起点或者为终点
+
+html(), css(), addClass(), removeClass()
+所有的东西都是方法！为什么不是属性
+html()改变元素内容
+attr() 改变HTML元素的属性，比如src
+$().attr("k", v);
+
+addClass() 追加类， removeClass()移除类，不干扰别的类名
+类名不要加点
+
+二、节点关系
+jQuery描述的节点关系，用的是人类社会的家族关系的词语：
+父亲，兄弟，儿子，祖先等。
+
+5.1 $(this) 我
+点击页面上的p, 点击谁，谁运动
+$("p").click(function(){
+    $(this).animate({"left": 1000}, 500);
+});
+this是原生JS对象，$()能够把this变为jquery对象，很关键
+$(this) 就是触发事件的那个元素
+
+$(this)没有引号，事实上$()有几个东西没有引号：
+$(this)
+$(document)//是什么以后说
+$(window)//是什么以后说
+
+5.2 parent()父亲
+点击每个p，点击谁让他的父元素运动：
+
+$("p").click(function(){
+    $(this).parent().animate({"left": 1000}, 500);
+});
+连续打点特性，注意parent是方法，所以有圆括号parent(),
+而不是属性。不忘记圆括号，很关键！
+parent() 就是父亲的意思
+
+5.3 children() 儿子
+点击哪个div，自己的所有孩子淡出
+$("div").click(function(){
+    $(this).children().fadeOut();
+});
+children就是孩子的意思，注意：jQuery里面的children一定是亲
+儿子，孙子不能被选中
+
+如果需要特别指定，是什么样的儿子，那么可以在childre()
+里面写上选择器
+$(this).children("span").fadeOut();
+选择的是自己的span儿子元素
+
+5.4 siblings() 兄弟
+点击哪个p,自己的兄弟都变红
+$("p").click(function(){
+    $(this).siblings().css("bacground-color", "red");
+});
+
+选择的是自己的亲兄弟，不是表兄弟，堂兄弟
+如果想选择自己的某种兄弟，可以加选择器
+$(this).slibings("span").css("background-color", "red");
+选择自己的span兄弟
+
+5.5 连续打点
+点击哪个p，让它自己变红，它兄弟变蓝，它爸变灰，
+其他爸变绿 ，其他爸的儿子变黄.
+
+$(this).css("background-color", "red")
+    .siblings().css("background-color", "blue")
+    .parent().css("background-color", "#ccc")
+    .siblings().css("background-color", "green")
+    .children().css("background-color", "yellow");
+    为什么可以连续打点呢？
+    这是因为jquery的每一个方法，都会return调用方法的人
+
+5.6 其他节点关系方法
+    这些都不怎么常用：
+    $(this).find("p");
+    从自己的所有后代中寻找p,不一定是儿子，比cihldren()
+    范围更大
+
+    $(this).next();
+    自己后面的第一个兄弟（同辈）
+
+    $(this).nextAll();
+    自己后面的所有兄弟（同辈)
+
+    $(this).prev();
+    自己的前面的第一个兄弟(同辈)
+
+    $(this).prevAll();
+    自己前面的所有兄弟（同辈)
+
+    $(this).parents();
+    自己的所有祖宗，直到最大的html元素
+
+三、jQuery中的序号问题
+2.1 eq() 大排队
+
+$("div p")，是所有元素为一个大队，然后eq(1)表示序号
+为1的元素，而不是每个div下面序号为1的元素
+
+//    $("p:eq(5)").css({"background-color":"red"});
+//    $("p").siblings(".xuxu").eq(0).css({"background-color":"red"});
+//    $("p").siblings(".xuxu:first").css({"background-color":"red"});
+//    $("div.ccc>p.xuxu").eq(0).css({"background-color":"red"});
+//    $("div.ccc>p:eq(1)").css({"background-color":"red"});
+他们的eq是不一样的，这是因为所处的队列不一样
+
+2.2 index() 自己的亲兄弟排名
+$(this).index(); 是一个方法
+
+index()值非常稳，无视你的$()怎么选择的，一定输出的是自己
+在亲兄弟中的排名
+也就是说eq()是队列名次，index()是家族名次
+
+ 2.3 对应
+ 对应是编程中非常常见的套路，根据我们点击box1中的p的序号
+$(".box1 p").click(function () {
+        $(".box2 p").eq($(this).index()).css("background-color", "red");
+    });
+
+对应这个东西确实好用，因为我们可以一条语句写选项卡效果：
+
+2.4 each() 方法
+表示队列遍历。$()选择出来的元素，可以认为是一个队列，
+那么each()方法将依次遍历队列中的每一个元素，遍历到之后，
+可以做一些事情。
+
+比较有意思的是，each方法的参数，是一个函数，
+表示遍历到某一个结点的时候做什么事情
+
+比如我们想让每一个div中的第1个p变红，那么就要遍历
+每一个div, 命令自己的1号儿子变红
+$("div").each(function(){
+    $(this).children("p").eq(1).css();
+});
+
+四、animate() 方法
+3.1 animate() 方法概述
+animate是动画的意思，jQuery中的这个方法也算是一个卖点
+
+jQuery中实现运动非常的简单，之前学习的setIntval()现在做
+运动用不上了。
+$("div").animate({"left":100}, 2000);
+animate有两个参数，第一个参数表示要变化到的CSS状态；
+第二个参数表示动画总时长，2000毫秒就是2s
+
+一定要记住，第一个参数必须是JSON，即使只有一个属性参与
+运动，也必须是JSON
+
+你会发现，jQuery的动画，是基于张点和动画总时长。
+你只需要告诉 jQuery需要变成什么样，用什么时间，怎么变，
+每步变化多少，是jQuery的事情。
+
+3.2 哪些属性能够参与动画
+一些常见的以数值为值的属性，可以参与动画。
+$("div").animate({
+    "top": 100,
+    "left": 100,
+    "width": 100,
+    "height": 100,
+    "font-size": 60,
+    "border-width": 10,
+    "padding": 10,
+    "margin": 10,
+});
+
+我们更关心的是哪些属性不能参与运动，一定死记：
+1) background-color 背景颜色。jQuery不能使背景颜色实现
+过渡动画，如果想要背景颜色过渡，需要使用css3的新特性。
+2）background-position: 背景定位。
+3) css3的属性，是不能过渡的，但是简单css3属性
+比如border-radius是可以的，复杂的比如transform属性是不
+能jQuery动画的。
+
+3.3 动画的顺序
+jQuery中有一个机制，叫做“动画队列”。
+栈，栈就是电梯，羽毛球桶。有一个特点：先进去的东西后出来；
+队列，就像食堂打饭，先进去的先出来
+
+同一个元素的animate语句，会顺序执行
+同一个元素多次打点调用animate方法，那么动画会自动排成队列
+先调用的先执行，后调用的等先执行的执行完毕之后再执行。
+
+$("div").animate({"left":800}, 1000);
+$("div").animate({"top":300}, 1000);
+$("div").animate({"left":100}, 1000);
+$("div").animate({"top":100}, 1000);
+这就是一个四段动画
+
+所以下面的两条语句
+$("div").animate({"left":100}, 1000);
+$("div").animate({"top":100}, 1000);//两段动画
+不等于：
+$("div").animate({
+    "left": 100,
+    "top": 100,
+}, 1000);
+
+不同元素的animate语句，同时执行
+页面上如果有不同的元素，都执行了animate, 那么此时会同时
+执行。不是说下面写的需要等待上面写的执行完毕 。
+这是因为animate是一个异步语句。不会死等animate完成。
+
+$("#box1").animate({"left":100}, 2000);
+$("#box2").animate({"left":100}, 2000);
+$("#box3").animate({"left":100}, 2000);
+$("#box4").animate({"left":100}, 2000);
+
+非动画语句，会提前执行
+我们书写下面的两条语句：
+$("div").animate({"left":100}, 2000);
+$("div").css("background-color", "red");
+本想先让动画执行，再改变背景颜色，其实是背景颜色瞬间变化
+然后运动，这是因为animate是异步语句，JS解析器不会死等
+animate执行完毕。
+
+3.4 回调函数
+所有的异步语句，都会提出一个叫做回调函数的概念，表示这
+条异步语句执行完毕之后做的事情。
+比如你做饭，用微波炉解冻肉，解冻的时候不会死等，而是做
+别的。所以我们说这叫做“异步”的调用微波炉。
+微波炉叮的一声，这就是表示异步语句执行完毕，开始执行回
+调函数。
+
+$("div").animate({"left": 100}, 2000, function(){
+    $(this).css("background-color", "yellow");
+});
+至些，我们已经发现了animate有第三个参数，分别是动画终点，
+动画总时长，回调函数
+
+特别的，jQuery封装的fadeIn(), fadeOut(), slideDown(),
+slideUp()都有回调函数，他们的回调函数写在括号里面，也是
+参数。
+$("p").fadeIn(2000, function(){
+    $(this).css("background-color", "red");
+});
+
+3.5 delay() 延迟
+任何的动画方法之前，都可以打点调用delay()圆括号里面写
+延迟的时间，就能造成动画的延迟。
+注意，delay后面只能加动画语句：
+$().delay().animate({}, 1000);
+$().delay().fadeIn();
+$().delay().fadeOut();
+$().delay().show(1000); //必须show里面有数字
+$().delay().hide(1000);//hide也是必须有数字
+$().delay().slideDown();
+$().delay().slideUp();
+
+让一个元素先延迟2000毫秒然后运动：
+$("input").click(function(){
+    $("div").delay(2000).animate({"left": 1000}, 500);
+});
+
+可以妙用这个delay， 结合each，让每一个p都顺序入场，实际
+上就相当于间隔均匀的时间，所以我们就用delay()函数里面是
+i * 400, 每个元素间隔400毫秒了
+$("p").each(function(i){
+    //$(this).delay(i * 400).animate();
+});
+
+3.6 stop() 方法
+命令元素停止！你以为简单，实际上有点小绕。
+stop()方法表示命令动画的元素立即停止当前动画，
+但是实际上能够两个布尔类型的参数：
+
+$().stop(是否清空动画队列， 是否立即完成当前动画);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
