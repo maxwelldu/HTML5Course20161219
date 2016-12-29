@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .carousel {
+            width: 560px;
+            height: 300px;
+            margin: 100px auto;
+            border:1px solid #000;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .carousel .m_unit {
+            width:9000px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .carousel .m_unit ul{
+            list-style: none;
+        }
+        .carousel .m_unit ul li {
+            float: left;
+            width:560px;
+            height: 300px;
+            overflow: hidden;
+        }
+        .carousel .m_unit ul li img{
+            width:560px;
+        }
+        .btns a{
+            position: absolute;
+            width:40px;
+            height: 40px;
+            top:50%;
+            margin-top:-20px;
+            background: yellow;
+            z-index: 999;
+        }
+        .btns a.leftbtn {
+            left:10px;
+        }
+        .btns a.rightBtn{
+            right:10px;
+        }
+        .circles {
+            position: absolute;
+            bottom: 10px;
+            right:10px;
+            width: 150px;
+            height: 18px;
+        }
+        .circles ol{
+            list-style: none;
+        }
+        .circles ol li{
+            float: left;
+            width: 18px;
+            height: 18px;
+            margin-right:10px;
+            border-radius:50%;
+            background: pink;
+            cursor: pointer;
+        }
+        .circles ol li.cur {
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <div class="btns">
+            <a href="javascript:;" class="leftBtn"></a>
+            <a href="javascript:;" class="rightBtn"></a>
+        </div>
+        <div class="m_unit">
+            <ul>
+                <li><a href="#"><img src="../shutter/images/01.jpg" alt=""></a></li>
+                <li><a href="#"><img src="../shutter/images/02.jpg" alt=""></a></li>
+                <li><a href="#"><img src="../shutter/images/03.jpg" alt=""></a></li>
+                <li><a href="#"><img src="../shutter/images/04.jpg" alt=""></a></li>
+                <li><a href="#"><img src="../shutter/images/05.jpg" alt=""></a></li>
+                <li><a href="#"><img src="../shutter/images/01.jpg" alt=""></a></li>
+            </ul>
+        </div>
+        <div class="circles">
+            <ol>
+                <li class="cur"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ol>
+
+        </div>
+    </div>
+
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script>
+        var $carousel = $(".carousel");
+        var $imageLis = $(".m_unit li");
+        var $m_unit = $(".m_unit");
+        var $circlesLis = $(".circles ol li");
+        //克隆图片第一张
+//        $(".m_unit ul").append($imageLis.eq(0).clone());
+
+        //当前滚动到第几张
+        var index = 0;
+
+        $(".rightBtn").click(rightBtnHandler);
+
+        function rightBtnHandler() {
+            console.log(index);
+            //函数节流
+            if ($m_unit.is(":animated")) return;
+
+            index++;
+            $m_unit.animate({"left":-560 * index}, 300, function () {
+                if (index >= $m_unit.children("ul").children("li").size()-1) {
+                    index = 0;
+                    $m_unit.css("left", 0);
+                }
+            });
+            changeCircle();
+        }
+
+        $(".leftBtn").click(function () {
+            if ($m_unit.is(":animated")) return;
+
+            index--;
+            if (index < 0) {
+                //最后一张是和第一张一样，
+                //-2是正常图片里面的最后一张
+                index = $m_unit.children("ul").children("li").length-2;
+                //把整个div移动到最后一张
+                $m_unit.css("left", -560 * (index+1));
+            }
+            $m_unit.animate({"left": -560 * index}, 300);
+            changeCircle();
+        })
+
+        //加上自动播放
+        var timer = setInterval(rightBtnHandler, 2000);
+        $carousel.mouseenter(function () {
+            clearInterval(timer);
+        })
+        $carousel.mouseleave(function () {
+            timer = setInterval(rightBtnHandler, 2000);
+        })
+
+        function changeCircle() {
+            console.log(index);
+            var n = index <= $m_unit.children("ul").children("li").size()-2 ? index : 0;
+            $circlesLis.eq(n).addClass("cur").siblings().removeClass("cur");
+        }
+
+        //点击每个小点
+        $circlesLis.click(function () {
+            //你点击第几个小圆点，index的值就是多少
+            index = $(this).index();
+            //
+            $m_unit.animate({"left":-560*index}, 300);
+            changeCircle();
+        })
+
+    </script>
+</body>
+</html>

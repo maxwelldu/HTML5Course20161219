@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: purple;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<button>start</button>
+<button>stop()</button>
+<button>stop(true)</button>
+<button>stop(true,true)</button>
+<button>stop(false,true)</button>
+<div></div>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script>
+    $("button").eq(0).click(function () {
+        if (!$("div").is(":animated")) {
+            $("div").animate({"left": 500}, 4000);
+            $("div").animate({"top": 500}, 4000);
+            $("div").animate({"left": 50}, 4000);
+            $("div").animate({"top": 50}, 4000);
+        }
+    })
+    $("button").eq(1).click(function () {
+        $("div").stop();
+    })
+    $("button").eq(2).click(function () {
+        $("div").stop(true);
+    })
+    $("button").eq(3).click(function () {
+        $("div").stop(true,true);
+    })
+    $("button").eq(4).click(function () {
+        $("div").stop(false,true);
+    })
+</script>
+</body>
+</html>

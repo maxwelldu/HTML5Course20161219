@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .shutter {
+            width: 800px;
+            height: 300px;
+            margin:10px auto;
+            position: relative;
+            overflow: hidden;
+            border:1px solid #000;
+        }
+        .shutter ul {
+            list-style-type: none}
+        .shutter ul li {
+            position: absolute;
+            top:0;
+        }
+        .shutter ul li div.mask {
+            position: absolute;
+            top:0;
+            left:0;
+            width:500px;
+            height:300px;
+            background: darkgray;
+            opacity: 0.6;
+        }
+        .shutter ul li.no0 { left:0; }
+        .shutter ul li.no1 { left: 160px;; }
+        .shutter ul li.no2 { left:320px; }
+        .shutter ul li.no3 { left:480px; }
+        .shutter ul li.no4 { left:640px; }
+    </style>
+</head>
+<body>
+<div class="shutter">
+    <ul>
+        <li class="no0"><img src="images/01.jpg" alt=""><div class="mask"></div></li>
+        <li class="no1"><img src="images/02.jpg" alt=""><div class="mask"></div></li>
+        <li class="no2"><img src="images/03.jpg" alt=""><div class="mask"></div></li>
+        <li class="no3"><img src="images/04.jpg" alt=""><div class="mask"></div></li>
+        <li class="no4"><img src="images/05.jpg" alt=""><div class="mask"></div></li>
+    </ul>
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script>
+    //0 160 320 480 640
+    //左边：0 75 150 225 300
+    //右边：0, 500, 575, 650, 725
+    var $lis = $(".shutter li");
+
+    //监听所有的li,碰到所有li的时候要触发的事情
+    $lis.mouseenter(function () {
+        $lis.stop(true);
+        //得到碰到的这个li的编号，$(this)表示触发事件的li标签
+        var index = $(this).index();
+        //要让每个li有不同的运动终点，所有就要有each这个东西
+//        遍历每个li
+        $lis.each(function (i) {
+            //$(this)指的是遍历到的li元素
+            if (i<=index) {
+                $(this).animate({"left": 75 * i}, 500);
+            } else {
+                $(this).animate({"left": 425 + 75 * i}, 500);
+            }
+        })
+        $(this).children(".mask").fadeOut();
+    })
+    $lis.mouseleave(function () {
+        $lis.each(function (i) {
+            $(this).animate({"left": 160 * i}, 500);
+        })
+        $(this).children(".mask").fadeIn();
+    })
+</script>
+</body>
+</html>
