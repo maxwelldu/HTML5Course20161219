@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function f() {
+        number = 10;
+    }
+    f();
+//    alert(number);
+
+    function fun() {
+        var a = 5;
+        console.log(a);
+    }
+    fun();
+    //在函数外部输出a
+    console.log(a);//如果变量没有定义则会报引用错误
+
+    //函数就是变量a的作用域，a只能在他的作用域内被访问
+    //在作用域外面是不能被访问。
+    //在js里面，只有函数能够关住作用域
+
+    //作用域链
+    var a = 1;
+    function fun1() {
+        var a = 2;
+        function fun2() {
+            var a = 3;
+            console.log(a);//3 本层就有一个a变量，直接输出
+            function fun3() {
+                var a = 4;
+                console.log(a);//3,本层没有a,向上一层找，找到了一个a
+            }
+            fun3();
+        }
+        fun2();
+    }
+    fun1();
+
+
+</script>
+</body>
+</html>

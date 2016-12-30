@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function outer() {
+        var a = 1;
+        function inner() {
+            console.log(a);
+        }
+        return inner;//不写小括号，表示只是返回函数
+        //定义，没有立即执行
+    }
+//    console.log(outer());
+    var i = outer();//相当于i内部盛放了一个inner
+    // 函数地址
+    console.log(i);
+    i(); //函数执行时，内部的变量有作用域链
+    //a在本层找不到定义，没有更外层
+    //但是，a输出了1, 这个1是我们inner函数定义时
+    //作用域链的a
+    //我们的函数不管被拿到其他任何地方，它可以记住
+    // 自己原来最初定义时的作用域（就是他出国了，还
+    // 知道自己的家乡在哪儿）
+
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //函数的形参
+    function funp(a) {
+        a = 5;
+        console.log(a);
+    }
+    funp();
+    console.log(a);
+
+    //全局变量
+    var a = 1;
+    function plus() {
+        ++a;
+    }
+    function minus() {
+        --a;
+    }
+    plus();
+    plus();
+    minus();
+    minus();
+    plus();
+    plus();
+    console.log(a);
+
+    //全局变量累加
+    var a = 1;
+    function p() {
+        a += 3;
+        console.log(a);
+    }
+    p();
+    p();
+    p();
+    p();
+    console.log(a);
+
+</script>
+</body>
+</html>

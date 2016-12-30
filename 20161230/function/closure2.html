@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    /*
+    var n = 999;
+    function f1() {
+        alert(n);
+    }
+    f1();
+
+    function f1() {
+        var n = 999;
+    }
+    alert(n);
+
+    //如何从外部读取里面的变量
+    function f1() {
+        var n = 999;
+        function f2() {
+            alert(n);
+        }
+        return f2;
+    }
+    var result = f1();
+    console.log(result);
+    result();
+     */
+
+    function f1() {
+        var n = 999;
+        nAdd = function() {
+            n += 1;
+        }
+        function f2() {
+            console.log(n);
+        }
+        return f2;
+        console.log(n);
+    }
+    var result = f1();
+    result();
+    nAdd();
+    result();
+
+    //
+
+    function fun1(m,n) {
+        function fun2(m) {
+            alert(m + n);
+        }
+        return fun2;
+    }
+    var f = fun1(3,4);
+    f(6);
+</script>
+</body>
+</html>
