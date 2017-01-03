@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    +function fun() {
+        console.log("haha");
+    }();
+
+    !function fun() {
+        console.log("haha");
+    }();
+
+    (function fun() {
+        console.log("haha");
+    })();
+
+    //    fun();//函数表达式的函数是不能在外部调用
+
+    (function (a) {
+        a++;
+        console.log(a);
+    })(8);
+
+    function sum(a, b, c) {
+        return (function (a, b) {
+                return a > b ? a : b;
+            })(a, b) + c;
+    }
+    console.log(sum(4, 5, 6));
+
+</script>
+</body>
+</html>

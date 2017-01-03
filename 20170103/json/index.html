@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var json = {
+        //每一项的值语法， "k": v,
+        "name": "maxwell",
+        "age": 18,
+        "sex": "male",
+        "high": 200   //最后一项后面不加逗号
+    };
+    console.log(json);
+    console.log(json.name);
+    console.log(json['name']);
+    json.age = 20;
+    console.log(json.age);
+
+    json = {
+        //每一项的值语法， "k": v,
+        "name": "zhangbo",
+        "age": 18,
+        "sex": "male",
+        "high": 200,   //最后一项后面不加逗号
+        "couple": {
+            "name": "Ada",
+            "age": 17,
+            "sex": "female",
+            "high": 168
+        }//最后一项后面不加逗号
+    };
+    console.log(json.couple.name);
+
+    json.skill = 'javascript';//添加了一个js技能
+    console.log(json.skill);
+    console.log(json.couple);
+
+    delete json.couple;//分手
+    console.log(json.couple);
+
+    //遍历JSON方法
+    for (var k in json) {
+        console.log(k, json[k]);
+    }
+
+    //复制JSON
+    var jsoncopy = json;
+    console.log(json);
+    //    jsoncopy['name'] = 'Bob';
+    console.log(json);
+
+    //复制新对象
+    var newjson = {};
+    //遍历
+    for (var k in json) {
+        newjson[k] = json[k];
+        //左边： 给新的JSON添加属性
+        //右边：获取旧的JSON的属性值
+    }
+    console.log(json);
+    newjson['name'] = 'bob';
+    console.log(json);
+    console.log(newjson);
+
+
+</script>
+</body>
+</html>

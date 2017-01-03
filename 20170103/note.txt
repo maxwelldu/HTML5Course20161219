@@ -1,0 +1,132 @@
+IIFE
+IIFE是一个缩写，immediately-invoked function expression.
+即时调用函数表达式
+
+IIFE表示在函数定义的时候，就立即执行
+function fun() {
+    console.log("haha");
+}();
+    这种方式是不能正常调用
+()调用函数的时候使用，只能在函数名后面或者函数表达式
+后面去使用
+
+我们需要把这个函数转化成函数表达式。
+方法：在函数前面加数学运算符
++function fun(){
+    console.log("haha");
+}();
+
+!function fun(){
+    console.log("haha");
+}();
+
+(function fun(){
+    console.log("haha");
+})();
+
+IIFE的函数名不能正常在外部调用，提示未定义，所以通常
+我们都是定义为一个匿名函数
+
+最常用的IIFE的写法，内部函数写成匿名函数的形式
+(function(){
+    语句
+})()
+
+IIFE 可以关住自己的作用域
+后面执行的小括号内部传递实际参数
+
+IIFE本身是一个表达式，如果有return的值，可以作为一个
+具体的数据参与运算或者传参
+
+
+二、JSON
+1、概念
+JSON叫做 JavaScript Object Notation, JavaScript对象
+表示法。
+学习过数组，可以存放一组数据，可以是不同类型的数据，
+要想访问每一项，必须知道他的下标
+["1", 2, null, true]
+这种方式有不便之处，而且数组一般都是放同类型数据
+
+JSON对象本身是一个引用类型数据。里面可以放多组数据，
+每一个数据里面都有自己的名字，可以通过名字来调取
+
+//定义JSON对象
+//{} 是JSON字面量的表示法
+var json = {
+    //每一项的值语法， "k": v,
+    "name": "maxwell",
+    "age": 18,
+    "sex": "male",
+    "high": 200   //最后一项后面不加逗号
+};
+
+抽象语法：
+var json = {
+    "k": v,
+    "k": v,
+    "k": v
+}
+调用每一项的值：点语法和[属性名]直接调用方法
+console.log(json.name);
+console.log(json['name']);
+
+嵌套的JSON属性调用，连续打点调用
+
+2、JSON的添加和删除
+添加：直接用变量名.自定义属性名，进行赋值
+//添加属性
+json.skill = 'javascript';
+console.log(json);
+
+删除：用一个 delete 关键字，后面跟我们打点调用的属性，
+就可以删除，中间必须有空格
+//删除属性
+delete json.couple;
+console.log(json);
+
+3、JSON的遍历 for...in
+对JSON对象里面的属性进行遍历，方便逐一操作
+方法：循环遍历， for...in
+定义一个变量k，依次接收JSON里面的每一个属性名
+for(var k in json) {
+    console.log(k, json[k]);
+}
+
+4、复制JSON
+遍历原JSON的第一项，将这些项分别复制给新的json的每一项
+//定义一个新JSON变量
+var newjson = {};
+//遍历
+for(var k in json) {
+    newjson[k] = json[k];
+}
+
+三、call和apply语句
+有两种方法可以帮我们指定函数内部的this.
+
+
+函数节流
+为了防止程序函数频繁快速的被调用，对函数进行限制，
+限制每隔多少时间才能执行一次。这就是函数节流的过程 。
+//加锁的机制
+//我们设置一个锁
+//只要事件被触发，锁就发生作用，程序被锁住
+//直到一段时间之后，才会解锁
+//设置一个锁，全局变量
+var lock = true; //true表示没锁住，能执行函数
+btn.onclick = function(){
+    //判断锁的情况，如果被锁直接退出
+    if (lock == false) {
+        return;
+    }
+
+    //能执行后面，先上锁，在指定时间之内，肯定不能点击
+    lock = false;
+    //隔一段时间打开锁
+    setTimeout(function(){
+        //开锁
+        lock = true;
+    }, 8000);
+    console.log('R');
+}

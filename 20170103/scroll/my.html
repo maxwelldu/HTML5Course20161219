@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding:0px;
+            margin:0px;
+        }
+        #father{
+            background:gray;
+            height:1000px;
+        }
+        .child-1{
+            background:orange;
+            height:50px;
+            text-align: center;
+            line-height: 50px;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+        }
+        #child-2{
+            background:blue;
+            height:400px;
+            text-align: center;
+        }
+        .class1{
+            position: fixed;
+            background: red;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+</head>
+<body>
+<div class="child-1">滚动导航栏</div>
+<div id="father">
+
+    <div id="child-2">内容</div>
+</div>
+<script>
+    (function(){
+        $(window).scroll(function(){
+            var top=$(document).scrollTop();
+             console.log(top);
+            // $("#child-1").css({"background":"red"})
+            if(top>0){
+                $(".child-1").addClass("class1")
+            }else{
+                $(".child-1").removeClass("class1")
+            }
+        });
+
+
+    })()
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">放技能</button>
+<script>
+    var obj1 = {
+        "name": "bob",
+        "age": 18,
+        "sex": "male"
+    };
+    var obj2 = {
+        "name": "steven",
+        "age": 19,
+        "sex": "male"
+    };
+    function showInfo() {
+        console.log(this.name);
+    }
+    //call有两层意思，
+    //  一，调用showInfo这个函数，
+    //  二，同时这个函数内部的this就是obj1
+    showInfo.call(obj1);
+
+    var obj = {
+        "name": "steven",
+        "age": 19,
+        "sex": "male"
+    };
+
+    function showInformation(n) {
+        for (var i = 0; i < n; i++) {
+            console.log(this.name);
+        }
+    }
+    showInformation.call(obj, 10);
+    showInformation.apply(obj, [5]);
+
+    var btn = document.getElementById('btn');
+    var lock = true; //true表示没锁住，能执行函数
+    btn.onclick = function () {
+        //判断锁的情况，如果被锁直接退出
+        if (lock == false) {
+            return;
+        }
+
+        //能执行后面，先上锁，在指定时间之内，肯定不能点击
+        lock = false;
+        //隔一段时间打开锁
+        setTimeout(function () {
+            //开锁
+            lock = true;
+        }, 8000);
+        console.log('R');
+    }
+</script>
+</body>
+</html>
