@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function f() {
+        var obj = {};
+        obj.name = "max";
+        obj.age = 18;
+        obj.sex = "男";
+        return obj;
+    }
+    var o = f();
+    console.log(o);
+
+    function fun() {
+        this.name = "max";
+        this.age = 18;
+        this.sex = "男";
+    }
+    var obj = new fun();
+    console.log(obj);
+    console.log(obj.name);
+    console.log(obj.age);
+
+    function fun1(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+    var obj1 = new fun1("3C", 18, "男");
+    var obj2 = new fun1("cc", 18, "女");
+    var obj3 = new fun1("ww", 18, "女");
+    console.log(obj1);
+    console.log(obj2);
+    console.log(obj3);
+
+    function Person(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        //称谓，我们用一个if语句来写
+        if (age >= 18 && sex == "男") {
+            this.chengwei = "老男人";
+        } else if (age < 18 && sex == "男") {
+            this.chengwei = "小鲜肉";
+        } else if (age >= 18 && sex == "女") {
+            this.chengwei = "欧巴桑";
+        } else if (age < 18 && sex == "女") {
+            this.chengwei = "小辣椒";
+        }
+        //喜欢的颜色，我们给他随机赋值，我们用一个IIFE来写
+        this.xihuandeyanse = (function () {
+            var arr = ["红色", "粉红色", "3C色", "绿色", "黑色", "浅黄色"];
+            return arr[parseInt(Math.random() * 6)];
+        })();
+    }
+    var o1 = new Person("3c", 18, "男");
+    var o2 = new Person("4d", 17, "男");
+    var o3 = new Person("2b", 17, "女");
+    var o4 = new Person("老K", 60, "女");
+    console.log(o1, o2, o3, o4);
+
+    function Dog(name, pinzhong, yanse) {
+        this.name = name;
+        this.pinzhong = pinzhong;
+        this.yanse = yanse;
+        return null;//3, "abc", true, false, undefind, NaN, null, 0, ""
+    }
+    var xiaobai = new Dog("小白", "哈马狗", "白色");
+    console.log(xiaobai);
+
+    function Dog2(name, pinzhong, yanse) {
+        this.name = name;
+        this.pinzhong = pinzhong;
+        this.yanse = yanse;
+        return [1, 2, 3];//return的是数组, 函数、对象、正则表达 会真正的返回
+    }
+    var xiaobai = new Dog2("小白", "哈马狗", "白色");
+    console.log(xiaobai);
+
+    function Dog3(name, pinzhong, color) {
+        this.name = name;
+        this.pinzhong = pinzhong;
+        this.color = color;
+        //创建一个方法
+        this.wangwang = function () {
+            console.log("我是" + this.name + "，我是 " + this.pinzhong + "狗，我的颜色是 " + this.color);
+        }
+    }
+    var xiaobai = new Dog3("小白", "哈巴狗", "白色");
+    //调用汪汪方法
+    console.log(xiaobai);
+    xiaobai.wangwang();
+    var heimei = new Dog3("黑莓", "土狗", "黑色");
+    console.log(heimei);
+    heimei.wangwang();
+
+    //比较函数是否相同，实际上比较的是内存地址，说明函数
+    //    的功能虽然一样，但是内存中的不同函数。
+    console.log(xiaobai.wangwang == heimei.wangwang);
+
+    //函数没有被共享，而是被镜像了
+
+
+    //构造函数，类
+    function Person(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+    //构造函数的原型对象
+    Person.prototype = {
+        "teacher": "王云",
+        "zhishang": "牛逼"
+    }
+    //实例化一个对象
+    var wangyun = new Person("王云", 28, "男");
+    //看看实例的 __proto__ 是不是等于构造函数的 prototype
+    console.log(wangyun.__proto__ === Person.prototype);
+    console.log(Person.prototype);
+    console.log(wangyun);
+
+    console.log(wangyun.name);//自己身上的属性
+    console.log(wangyun.age);
+    console.log(wangyun.sex);
+    console.log(wangyun.teacher);//自己身上没这个属性，没着wangyun.__proto__进行查找
+    console.log(wangyun.zhishang);
+    console.log(wangyun.shengao);//找不到就返回undefined
+    console.log(wangyun.toString());
+
+    //构造函数，类
+    function Person(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+    //构造函数的原型对象
+    Person.prototype = {
+        "teacher": "王云",
+        "zhishang": "牛逼"
+    };
+    //实例化实例
+    var xm = new Person("小明", 12, "男");
+    //给小明设置一个属性，注意这个属性和原型上的属性同名
+    xm.zhishang = "很牛逼";
+
+    console.log(xm.zhishang);//不会沿着原型链查找
+    console.log(xm.__proto__.zhishang);//原形对象上的属性没变
+
+    var obj = {};
+    obj.name = "xxx";
+    obj.age = 132;
+
+
+    /*
+     function Person(name, age, sex){
+     this.name = name;
+     this.age = age;
+     this.sex = sex;
+     }
+     Person.prototype = Math;//我们把人类的原型对象设置为Math
+
+     var xiaoming = new Person("小明", 12, "男");
+     console.log(xiaoming);
+     //    console.log(xiaoming.random());
+
+     */
+    function Person(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+    //我们一般把方法都定义在原型上
+    Person.prototype.sayHello = function () {
+        console.log("你好，我是" + this.name + "，我今年" + this.age + "岁了，我的性别是" + this.sex);
+    }
+    var xiaoming = new Person("小明", 12, "男");
+    var xiaohong = new Person("小红", 15, "女");
+
+    //调用方法，此时自己身上没有方法，沿着原型链查找
+    xiaoming.sayHello();
+    xiaohong.sayHello();
+
+    console.log(xiaoming.sayHello === xiaohong.sayHello);
+
+
+</script>
+</body>
+</html>

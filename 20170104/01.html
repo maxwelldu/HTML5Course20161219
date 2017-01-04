@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="box">change</button>
+<script>
+    var obj = {
+        "name": "max",
+        "age": 18
+    }
+    console.log(obj);
+
+    var obj1 = {
+        name: "max",
+        age: 18,
+        sex: "男"
+    }
+    var obj2 = {
+        name: "max",
+        age: 18,
+        sex: "男"
+    }
+    console.log(obj1 == obj2);
+
+    var n1 = 5;
+    var n2 = 5;
+    console.log(n1 == n2);
+
+    console.log({} == {});
+
+    var obj3 = {
+        name: "max",
+        age: 18,
+        sex: "男",
+        sayHello: function () {
+            console.log("你好");
+        }
+    }
+    obj3.sayHello();
+
+    var obj4 = {
+        name: "max",
+        age: 18,
+        sex: "男",
+        sayHello: function () {
+            console.log("你好，我叫 " + this.name + ", 我今年" + this.age + ', 我的性别是' + this.sex);
+        }
+    }
+    obj4.sayHello();
+
+    var name = "anne";
+    var age = 19;
+    var sex = "男";
+    obj4.sayHello.call(window);
+
+    function fun() {
+        console.log(this);
+    }
+    fun();
+    window.fun();
+
+    var box = document.getElementById("box");
+    box.onclick = function(){
+        //备份this
+        var _this = this;//在外层函数中，this就是box,
+//        备份，成为一个局部变量
+        setTimeout(function(){
+            _this.style.background = "red";
+        }, 1000);
+    }
+
+    function fu() {
+        console.log(this);
+    }
+//    setInterval(fu, 1000);
+//    window.setInterval(fu, 100000);
+
+    function fun(){
+        console.log(this);
+    }
+    var obj5 = {
+        name: "max",
+        sayHello: fun //这个属性的值是一个函数，
+        //所以这个属性是一个方法
+    }
+    obj5.sayHello();//对象.方法() this就是对象
+//    setInterval(obj5.sayHello, 1000);
+
+
+    /*
+    setInterval(function(){
+        console.log(this);
+    }, 1000);
+    */
+
+    function func() {
+        console.log(this);
+    }
+    var obj6 = {
+        "name": "我是obj6"
+    }
+    func.call(obj6);
+
+    console.log(Math.max(4, 6, 8, 11, 44, 3, 43, 2, 23));
+
+    var arr = [67, 433, 32, 2, 3456];
+    console.log(Math.max.apply(null, arr));
+
+    function funct() {
+        console.log("hello world");
+    }
+    new funct();
+
+
+</script>
+</body>
+</html>
