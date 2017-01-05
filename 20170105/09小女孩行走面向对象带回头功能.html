@@ -54,6 +54,7 @@
         this.x = x;
         this.y = y;
         this.speed = speed;
+        this.direction = 2;
         this.getgirl();
         this.walk();
     }
@@ -68,25 +69,29 @@
         var nowleft = this.x;
         var self = this;
         this.timer = setInterval(function () {
-            nowleft += 4;
+            var offset = self.direction == 1 ? -1 : 1;
+            nowleft += 4 * offset;
             buzi++;
             //如果超过了600，咱们就让他消失
             if (nowleft > 600) {
-                self.die();
+                self.direction = 1;
             }
-            self.dom.style.backgroundPosition = -(buzi % 7) * 79 + "px -216px";
+            if (nowleft<=0) {
+                self.direction = 2;
+            }
+            if (self.direction == 2) {
+                self.dom.style.backgroundPosition = -(buzi % 7) * 79 + "px -216px";
+            } else if(self.direction == 1) {
+                self.dom.style.backgroundPosition = -(buzi % 7) * 79 + "px -108px";
+            }
             self.dom.style.left = nowleft + "px";
         }, this.speed);
     };
-    Walkgirl.prototype.die = function(){
-        clearInterval(this.timer);
-        document.body.removeChild(this.dom);
-    }
 
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 10; i++) {
         var x = parseInt(Math.random() * 500);
         var y = parseInt(Math.random() * 700);
-        var speed = 50 + parseInt(Math.random() * 100);
+        var speed = 5 + parseInt(Math.random() * 10);
         new Walkgirl(x, y, speed);
     }
 </script>
