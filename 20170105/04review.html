@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function fun() {
+        var a = 100; //实际上就是设置一个局部变量，不是谁的属性！！！
+        this.a = 200; //是window的a属性
+    }
+    fun();//函数调用，所以this指向window
+    console.log(fun.a); //undefined
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 142px;
+            height: 410px;
+            float: left;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    //构造函数，红绿灯“类”
+    function Honglvdeng() {
+        //自己的颜色值
+        this.color = "r";
+        //调用自己的初始化方法
+        this.init();
+        //绑定监听
+        this.bindEvent();
+    }
+    Honglvdeng.prototype.init = function(){
+        //创建一个div，并且指向自己的dom属性
+        //这个this是谁？是新秘密创建的那个对象
+        this.dom = document.createElement("div");
+        //添加到文档中
+        document.body.appendChild(this.dom);
+        this.dom.style.background = "url(images/"+this.color+".png)";
+    }
+    Honglvdeng.prototype.bindEvent = function() {
+        //备份this
+        var self = this;
+        this.dom.onclick = function() {
+            if(self.color == "r") {
+                self.color = "y";
+            } else if(self.color == "y") {
+                self.color = "g";
+            } else {
+                self.color = "r";
+            }
+            self.dom.style.background = "url(images/"+self.color+".png)";
+        }
+    }
+
+    for (var i = 0; i < 10; i++) {
+        new Honglvdeng();
+    }
+</script>
+</body>
+</html>

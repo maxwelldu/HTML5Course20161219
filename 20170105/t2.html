@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>红绿灯(面向对象)</title>
+</head>
+
+<style>
+    div{width:142px;height:409px;float:left;}
+</style>
+
+<body>
+
+</body>
+
+<script>
+    function trafficLight(){
+        this.color="r";
+        this.init();
+        this.clickEvent();
+    }
+
+    trafficLight.prototype.init=function(){
+        this.dom=document.createElement("div");
+        document.body.appendChild(this.dom);
+        this.dom.style.background="url(images/"+this.color+".png)";
+    }
+
+    trafficLight.prototype.clickEvent=function() {
+        var _this = this;
+
+        this.dom.style.background = "url(images/" + _this.color + ".png)";
+        this.dom.onclick = function () {
+
+            if (_this.color == "r") {
+                _this.color = "y";
+            } else if (_this.color == "y") {
+                _this.color = "g";
+            } else if (_this.color == "g") {
+                _this.color = "r";
+            }
+            _this.dom.style.background = "url(images/" + _this.color + ".png)";
+        }
+    }
+
+        for(var i=0;i<=9;i++){
+            new trafficLight();
+        }
+</script>
+</html>

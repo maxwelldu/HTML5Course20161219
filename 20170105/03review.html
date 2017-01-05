@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Person() {
+        this.age = "max";
+    }
+    Person(); //圆括号执行，所以this是window,
+//    实际上是给window添加了一个age属性，就是全局变量
+    console.log(Person.name);//身上没有age属性，所以undefined
+    console.log(age);//
+    console.log(window.age);//
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 142px;
+            height: 410px;
+            float: left;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    /**
+     * 10个红绿灯
+     * 用一个for就行
+     *
+     * 红绿灯
+     * div， 事件，改变背景图片
+     * 属性：
+     *  this.dom //存放div
+     *  this.color //存放红绿灯的颜色
+     *  this.dom.onclick 点击的时候切换颜色属性，
+     *  改变div的背景图片
+     *
+     *  伪代码：
+     *  绿红灯构造函数() {
+     *      创建一个div，并保存为红绿灯的一个dom属性
+     *      添加到页面上
+     *      设置自己的颜色属性为红色
+     *      将div的背景颜色设置为当前颜色对应图片
+     *  }
+     *
+     *  for(十次) {
+     *      new 红绿灯();
+     *  }
+     */
+    function Honglvdeng() {
+        //创建一个div，并且指向自己的dom属性
+        this.dom = document.createElement("div");
+        //添加到页面
+        document.body.appendChild(this.dom);
+        //颜色
+        this.color = "r";
+        this.dom.style.background = "url(images/"+this.color+".png)";
+        //备份this
+        var self = this;
+        this.dom.onclick = function(){
+            //看自己当前的颜色
+            if (self.color == "r") {
+                self.color = "y";
+            } else if(self.color == "y") {
+                self.color = "g";
+            } else if(self.color == "g") {
+                self.color = "r";
+            }
+            self.dom.style.background = "url(images/"+self.color+".png)";
+        }
+    }
+    for (var i = 0; i < 10; i++) {
+        new Honglvdeng();
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 79px;
+            height: 108px;
+            background: url(images/girl.png) no-repeat;
+            background-position: 0px -216px;
+            position: absolute;
+            top: 100px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        var div = document.getElementsByTagName("div")[0];
+        var buzi = 0;
+        var nowleft = 0;
+        setInterval(function () {
+            nowleft += 4;
+            buzi++;
+            if (buzi > 7) {
+                buzi = 0;
+            }
+            div.style.backgroundPosition = -buzi * 79 + 'px -217px';
+            div.style.left = nowleft + 'px';
+        }, 30);
+
+    </script>
+</body>
+</html>
