@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //任何函数都有原型，如果函数是普通函数，原型没有什么用
+    function fun() {
+        console.log("Hi");
+    }
+    console.log(fun.prototype);
+    console.log(typeof fun.prototype);
+
+    function Person() {
+        this.name = "ww";
+    }
+    /*
+    Person.prototype = {
+      name: "cc",
+        sex: "男",
+        age: 18
+    };
+    */
+    Person.prototype = [
+        1,2,3,4
+    ];
+//    Person --> Array --> Object
+
+    var cc = new Person();
+    console.log(cc.__proto__);
+    console.log(Person.prototype);
+    console.log(cc.__proto__ === Person.prototype);
+
+
+</script>
+</body>
+</html>

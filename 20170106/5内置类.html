@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var obj = {
+        "name": "name",
+        "age": 18,
+        "sex": "female"
+    };
+    console.log(obj);
+
+    var obj1 = new Object();
+    obj1.name = "name";
+    obj1.age = 18;
+    obj1.sex = "female";
+    console.log(obj1);
+
+    /*
+     function fun() {
+     console.log("hi");
+     console.log("hello");
+     }
+     fun();
+     */
+
+    var fun = new Function("console.log('hi');console.log('hello');");
+    fun();
+
+    /*
+     function sum(a,b) {
+     return a + b;
+     }
+     console.log(sum(8,5));
+     */
+
+    var sum = new Function("a", "b", "return a + b;");
+    console.log(sum(8, 5));
+
+    var arr = new Array();
+    console.log(arr);
+    arr[8] = "haha";
+    arr[18] = "haha";
+    arr[28] = "haha";
+    arr[38] = "haha";
+    arr[48] = "haha";
+    console.log(arr);
+
+    function repeat(str, n) {
+        var result = "";
+        for (var i = 0; i < n; i++) {
+            result += str;
+        }
+        return result;
+    }
+    console.log(repeat("T", 5));
+
+    var arr = new Array(5);
+    console.log(arr.join("T"));
+
+    console.log((new Array(5)).join("T"));
+
+    /*
+     var a = 5;
+     console.log(a);
+     */
+
+    var a = new Number(5);
+    console.log(a);
+    console.log(typeof a);
+
+    console.log(a + 4); //9
+
+    //在用Number()函数转一下，可以去壳，只留基本类型值
+    var b = Number(a);
+    console.log(b);//5
+    console.log(typeof b);//number
+
+    //基本类型值和引用类型的值有很大的区别：
+
+    if (a > 31) {
+        console.log("hello");
+    }
+
+    console.log((5));
+    var c = new Number(5);
+    console.log(typeof c);
+
+    var strObj = new String("hello");
+    console.log(strObj);
+
+    console.log(strObj.__proto__ === String.prototype);
+    console.log("Hello".__proto__ === String.prototype);
+
+    var p = new Number(3);
+    var q = new Number(3);
+    console.log(p == 3); //true, 对象用基本值对比
+    console.log(q == 3);
+    console.log(p == q); //false
+
+    var a = new Boolean(true);
+    console.log(a);
+
+    var a = new Boolean(false);
+    if (a) {
+        console.log("hi");
+    }
+
+    if (5) {
+        console.log("我能输出吗？5");
+    }
+    if (5 == true) {
+        console.log("我能输出吗？5 == true");
+    }
+
+    var a = new Boolean(false);
+    var b = new Boolean(false);
+
+    console.log(a == b);//false
+    console.log(a == false);//true
+    console.log(b == false);//true
+</script>
+</body>
+</html>

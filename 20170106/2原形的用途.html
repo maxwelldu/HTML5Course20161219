@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //构造函数里面，负责定义一些属性，随着构造函数执行，
+//    这些属性会绑定在new出来的对象身上
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    //构造函数里面，负责定义一些属性，方法放在原型
+    console.log(Person.prototype);
+
+    Person.prototype.sayHello = function(){
+        alert("我是" + this.name);
+    };
+    console.log(Person.prototype);
+</script>
+</body>
+</html>

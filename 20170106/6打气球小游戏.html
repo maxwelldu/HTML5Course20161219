@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html{
+            height:100%;
+        }
+        body {
+            height:100%;
+            background: url(images/bg.jpg);
+            background-size: cover;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 60px;
+            color: white;
+        }
+        .ballon {
+            width: 81px;
+            height: 119px;
+            background: url(images/ballon.png) no-repeat;
+            position: absolute;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+<h1 id="fenshu">0</h1>
+<h1 id="daojishi">50</h1>
+
+<audio src="images/c.wav" id="bomb"></audio>
+
+<script>
+    var ofenshu = document.getElementById("fenshu");
+    var odaojishi = document.getElementById("daojishi");
+    var obomb = document.getElementById("bomb");
+
+    var fenshu = 0;
+    var daojishi = 50;
+
+    function Ballon() {
+        this.top = 400;
+        this.left = Math.random() * 800;
+        this.score = parseInt(Math.random() * 7) + 1;
+
+        this.init();
+        this.fly();
+    }
+    //初始化
+    Ballon.prototype.init = function(){
+        //创建DOM, 并且给这个对象设置属性
+        this.dom = document.createElement("div");
+        //更改类名
+        this.dom.className = "ballon";
+        //追加这个DOM元素
+        document.body.appendChild(this.dom);
+        //设置样式
+        this.dom.style.left = this.left + 'px';
+        this.dom.style.top = this.top + 'px';
+        //设置背景定位，背景定位要根据自己的分数来设置
+        var x = -((this.score - 1) % 4) * 96;
+        var y = -parseInt((this.score - 1) / 4 ) * 120;
+        this.dom.style.backgroundPosition = x + "px " + y + "px";
+
+        var self = this;
+        this.dom.onclick = function(){
+            self.bomb();
+            //累加分数
+            fenshu += self.score;
+            ofenshu.innerHTML = fenshu;
+
+            //音效
+            obomb.load();
+            obomb.play();
+        }
+    }
+    Ballon.prototype.fly = function(){
+        //备份自己
+        var self = this;
+        //让气球移动
+        this.timer = setInterval(function(){
+            //更改top的值
+            self.top -= 1.5 * self.score;
+            //小于-100
+            if (self.top < -100) {
+                self.bomb();
+            }
+            self.dom.style.top = self.top + "px";
+        }, 20);
+    };
+    Ballon.prototype.bomb = function(){
+        clearInterval(this.timer);
+        //移除DOM
+        document.body.removeChild(this.dom);
+    }
+
+    var count = 0;
+    var timer = setInterval(function(){
+        count++;
+        if (count % 2 == 0) {
+            daojishi--;
+            odaojishi.innerHTML = daojishi;
+        }
+
+        if(daojishi == 0) {
+            clearInterval(timer);
+            alert("Game Over 你的分数是：" +fenshu);
+        }
+        new Ballon();
+    }, 500);
+</script>
+</body>
+</html>

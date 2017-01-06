@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //现在这个是数组字面量
+    var arr = [66, 77, 33];
+
+    // 寻找原型链的终点，发现是Object.prototype
+    console.log(arr.__proto__.__proto__.constructor);
+
+    //函数也是对象
+    function Dog() {
+    }
+    Function.prototype.hello = function(){
+        console.log("hello dog");
+    }
+    //所有的函数都能调用这个方法
+    Dog.hello();
+    console.log(Dog.__proto__.constructor);
+
+    function Cat() {
+    }
+    Cat.hello();
+
+    //数组
+    var arr = [43, 34, 23, 65, 76, 47];
+    //我们可以利用原型链的机制，给数组对象增加方法
+    Array.prototype.max = function() {
+        var max = this[0];
+        for (var i = 1; i < this.length; i++) {
+            if (this[i] > max) {
+                max = this[i];
+            }
+        }
+        return max;
+    }
+
+    //任何数组都能调用这个方法了
+    console.log(arr.max());
+
+    String.prototype.sayHello = function(){
+        console.log("谁让你调用我的");
+    }
+    "hi".sayHello();
+</script>
+</body>
+</html>

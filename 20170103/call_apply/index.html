@@ -24,6 +24,8 @@
     //  一，调用showInfo这个函数，
     //  二，同时这个函数内部的this就是obj1
     showInfo.call(obj1);
+    showInfo();
+    showInfo.call(obj1);
 
     var obj = {
         "name": "steven",

@@ -1,0 +1,350 @@
+一、内置包装类
+var a = new A();
+此时一定：
+A.prototype === a.__proto__; //true
+
+什么是包装类？就是一些系统内置的构造函数，实际上应该叫
+“包装构造函数”，但是没有人这么叫，通常叫“包装类”
+
+3.1 Object() 构造函数
+我们平时创建一个自定义对象，最好用的方法是使用字面量
+var obj = {
+    "name": "name",
+    "age": 18,
+    "sex": "female"
+};
+实际上，还可以通过 new Object()的方法创建对象。Object()
+是系统内置的构造函数，我们叫做包装构造函数，也叫包装类。
+至于包装两个字怎么理解，一会儿见到Number, String就知道了
+
+完全等价于：
+var obj = new Object(); //创建一个空对象 {}
+obj.name = "name";
+obj.age = 18;
+obj.sex = 12;
+
+我们说过：
+var a = new A();
+此时
+a.__proto__ === A.prototype
+
+所以：
+obj.__proto__ === Object.prototype
+Object.prototype 是所有对象的原型链的终点。
+
+此时我们注意，用字面量写的对象，也满足这个规律
+var obj = {};
+obj.__proto__ === Object.prototype; //true
+
+也就是说，任何对象字面量（JSON）都满足他的__proto__
+等于Object.prototype
+
+1.2 Function() 构造函数
+创建函数我们使用字面量：
+function fun() {
+    console.log("hi");
+    console.log("hello");
+}
+fun();
+
+实际上，function也是有包装类，Function()。
+
+var fun = new Function("console.log('hi');console.log('hello');");
+fun();
+
+如果函数有参数，怎么办？
+function sum(a,b) {
+    return a + b;
+}
+console.log(sum(8,5));
+等价于
+var sum = new Function("a", "b", "return a + b;");
+console.log(sum(8, 5));
+
+就是把函数的形参，罗列出来，new Function()最后一个
+参数，一定是函数体。
+
+同样的，当我们遇见var a = new A()的时候要敏感，马上
+得出 a.__proto__ === A.prototype.
+所以这边，sum.__proto__ === Function.prototype
+
+世界上所有的函数，包括直接用字面量写的函数，都是Function
+的实例。
+
+更加证明了，函数是对象。因为函数都是被new出来的，new
+出来的东西就是对象。
+
+１.3 Array() 构造函数
+我们一般创建数组，使用字面量。
+var arr = [1, 4, 45, 3];
+实际上，可以用
+new Array();
+创建数组。Array（）也是一个系统的内置包装类。
+
+构造函数的参数，表示创建的数组的初始长度，而不是默认
+内容。
+var arr = new Array(4);
+arr的长度是4
+arr.length = 4
+
+此时数组每个项目都是undefined, 不过长度是4，挺无脑的
+就是说一个数组，每个项都是undefined的空数组，但是此时
+数组的长度是4.这是语言规定。
+
+这个4没有什么约束作用。可以给数组增加超过4个项目：
+var arr = new Array(4);
+console.log(arr); //[]
+console.log(arr.length); //4
+//添加项目
+arr[8] = "haha";
+console.log(arr.length); //9
+
+所以
+var arr = [1, 4, 45, 3];
+等价于
+var arr = new Array();
+arr[0] = 1;
+arr[1] = 4;
+arr[2] = 45;
+arr[3] = 3;
+
+妙用包装类。
+面试题：用1条语句实现重复字符串str, n次
+
+如果去掉1条语句的限制，会写循环语句：
+ function repeat(str, n) {
+        var result = "";
+        for (var i = 0; i < n; i++) {
+            result += str;
+        }
+        return result;
+    }
+    console.log(repeat("T", 5));
+
+1条语句怎么写？
+我们知道join()方法就是把数组变成字符串，数组的项和项
+之间，用传入的参数分割。
+var arr = [34, 34, 23, 54, 43];
+console.log(arr.join("T"));//34T34T23T54T43T
+
+所以：
+var arr = new Array(4);
+console.log(arr.join("T"));
+
+1.4 RegExp() 构造函数
+这是正则表达式包装类。
+我们用字面量创建一个正则：
+var reg = /\d/g;
+也可以用包装类，等价于：
+var reg = new RegExp(/\d+/, "g");
+//也等价于
+var reg = new RegExp("/\d+/", "g");
+
+所以reg也是一个对象，并且
+reg.__proto__ === RegExp.prototype
+所有的正则字面量都：
+/\d+/.__proto__ === RegExp.prototype
+
+至此所有引用类型都说完了，下面基本类型值的包装类。
+
+1.5 Number() 构造函数
+我们用字面量设置一个变量的值
+var a = 5;
+此时a就是一个number类型的变量
+
+我们可以用包装类：
+var a = new Number(5);
+此时a是一个对象！！不是基本类型值5，而是一个对象！
+这个对象没有任何属性，只有一个内蕴的一个属性，叫做
+primitiveValue原始值，原始值是5
+
+var a = new Number(5);
+console.log(a); // {[[Primitivevalue]]: 5}
+console.log(typeof a);
+
+这个对象，可以以自己的原始值参与计算
+    console.log(a + 4); //9
+
+    //在用Number()函数转一下，可以去壳，只留基本类型值
+    var b = Number(a);
+    console.log(b);//5
+    console.log(typeof b);//number
+
+//基本类型值和引用类型的值有很大的区别：
+new出来的对象的__proto__ 等于包装类的prototype
+ a.__proto__ === Number.prototype
+ 但是数字自己没有这个性质。
+ 33.__proto__ == Number.prototype
+ 因为33根本不是对象，怎么能用点呢
+
+参于判断、循环等语句的时候 a是对象还是数据，无所谓，看不出来。
+if (a>31) {
+    console.log("hello");
+}
+
+特别的，JS有一个圆括号的一个机制，各种书解释不同。
+我们把()当做一次运算，结果是具有包装类返回的数字
+对象的原型链的一个基本值。就是说(5)有了__proto__,
+但是还是一个基本类型值，类型是number. 不能加属性。
+
+(5).__proto__ === Number.prototype
+括号的方式和new Number(5)是不一样的，new的方式返回
+的是一个对象
+
+Number("123");
+123
+Number(true);
+1
+Number(false);
+0
+Number(undefined);
+NaN
+Number({});
+NaN
+Number("what?");
+NaN
+
+最后我们说一下，Number的构造函数不用new来调用的时候，可以进行
+隐匿转换。可以把任何东西转换成数字，注意换不成数字的，变成
+NaN，实际上NaN也是数字。字符串转的时候，如果不是纯数字
+字符串就是NaN
+
+console.log(5 * "3年");
+实际上用Number()默默的转换一下
+console.log(5 * Number("3年")); //NaN
+
+隐式转换的本质，是偷偷调用的Number()函数
+
+1.6 String() 构造函数
+var strObj = new String("hello");
+console.log(strObj);
+
+这是一个类数组对象。
+所以
+strObj.__proto__ === String.prototype
+
+//不加圆括号也是可以直接
+console.log("Hello".__proto__ === String.prototype);
+
+同样的，String() 不用new的时候，就是隐式转换
+String(123);
+"123"
+String("一百二十三");
+"一百二十三"
+String(true);
+"true"
+String(false);
+"false"
+String(null);
+"null"
+String(undefined);
+"undefined"
+
+小总结：
+a = 3 和 a = new Number(3) 不等价。前者a是number
+基本值，后者a是对象
+
+题目：
+var p = new Number(3);
+var q = new Number(3);
+console.log(p == 3); //true, 对象用基本值对比
+console.log(q == 3);
+console.log(p == q); //false
+
+数字加上圆括号之后，就变为有原型链的小对象了，此时它
+还是基本值，挺抽象的，又有原型链, 又有基本值，加不上
+属性。
+
+1.7 Boolean
+var a = true;
+此时a就是基本类型值，是一个布尔值
+
+var a = new Boolean(true);
+a 是一个对象，原始值属性是true
+
+此时，一定要记住大坑，就是进行if语句的比较的时候，
+及时原始值是假，也能通过if
+var a = new Boolean(false);
+if (a) {
+    console.log("hi");
+}
+能够输出。能通过if输出，但是不是把他当做了true，要注意：
+
+因为if语句不是靠 == true这样判断的
+if (5) {
+    console.log("我能输出吗？5");
+}
+
+if (5 == true) {
+    console.log("我能输出吗？5 == true");
+}
+
+Boolean()函数不用new的时候，隐式转换：
+Boolean("false");//true, 字符串转，
+//只要不是空字符串，就是true
+a == true
+false
+a == false
+true
+Boolean("false");
+true
+Boolean("你好");
+true
+Boolean(5)
+true
+Boolean({})
+true
+
+//负性的值，都是false
+Boolean("")
+false
+Boolean(NaN);
+false
+Boolean(false);
+false
+Boolean(0);
+false
+Boolean(undefined);
+false
+Boolean(null);
+false
+
+总结：
+引用类型值，new出来的和字面量是等价的
+基本类型值，new出来的是对象；字面量是值。字面量也有
+    原型链，但是确实不是对象，不能加属性。注意数字
+    圆括号的这个事儿
+
+2、内置包装类的关系
+我们说过任何一个函数都是Function函数new出来的。
+也就是说，只要你是函数，你就一定是Function()的实例
+
+所以，任何一个函数，包括字面量写的函数，包括内置函数，
+都是Function的实例。
+console.log(Object.__proto__ == Function.prototype);
+true
+console.log(Array.__proto__ == Function.prototype);
+ true
+console.log(RegExp.__proto__ == Function.prototype);
+true
+console.log(Number.__proto__ == Function.prototype);
+true
+console.log(String.__proto__ == Function.prototype);
+ true
+console.log(Boolean.__proto__ == Function.prototype);
+ true
+console.log(Function.__proto__ == Function.prototype);
+ true
+
+注意：Object也是Function的实例。
+Fucntion是Function自己的实例
+
+继续说，我们知道任何一个对象，都是Object的实例。
+只要一个东西是对象（属于对象也算，比如函数，数组），
+他一定有原型！只有一个元素没有原型，就是原型链的终点：
+Object.prototype
+
+
+
+
+

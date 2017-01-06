@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var str = new String("你好");
+    console.log(str);
+    console.log(str.toString());
+
+    console.log(str.__proto__.__proto__.constructor);
+
+    var num = 123;
+    console.log(num.__proto__.constructor);
+
+    var a = true;
+    console.log(a.__proto__.constructor);
+
+    /*
+    var c = undefined;
+    console.log(c.__proto__.constructor);
+
+    var b = null;
+    console.log(b.__proto__);
+    */
+
+</script>
+</body>
+</html>

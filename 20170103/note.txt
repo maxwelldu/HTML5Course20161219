@@ -20,9 +20,13 @@ function fun() {
     console.log("haha");
 }();
 
-(function fun(){
+-function fun(){
     console.log("haha");
-})();
+}();
+
+(function fun(){
+      console.log("haha");
+  })();
 
 IIFE的函数名不能正常在外部调用，提示未定义，所以通常
 我们都是定义为一个匿名函数
@@ -67,6 +71,8 @@ var json = {
     "k": v,
     "k": v
 }
+v表示值，值的话可以是字符串类型，数字，布尔，数组
+
 调用每一项的值：点语法和[属性名]直接调用方法
 console.log(json.name);
 console.log(json['name']);
@@ -78,6 +84,8 @@ console.log(json['name']);
 //添加属性
 json.skill = 'javascript';
 console.log(json);
+//修改属性
+json.name = "tom";
 
 删除：用一个 delete 关键字，后面跟我们打点调用的属性，
 就可以删除，中间必须有空格
@@ -89,7 +97,7 @@ console.log(json);
 对JSON对象里面的属性进行遍历，方便逐一操作
 方法：循环遍历， for...in
 定义一个变量k，依次接收JSON里面的每一个属性名
-for(var k in json) {
+for (var k in json) {
     console.log(k, json[k]);
 }
 
