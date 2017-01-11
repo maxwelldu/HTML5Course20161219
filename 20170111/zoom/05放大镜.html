@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .smallPic {
+            width: 350px;
+            height: 350px;
+            border: 1px solid #ccc;
+            margin-top: 100px;
+            position: relative;
+        }
+
+        .smallPic .zoom {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 175px;
+            height: 175px;
+            background: #FEDE4F;
+            opacity: 0.5;
+            border: 1px solid #aaa;
+            display: none;
+        }
+        .bigPic {
+            width: 400px;
+            height: 400px;
+            background: url(images/da.jpg) no-repeat;
+            position: absolute;
+            top:100px;
+            left: 400px;
+            border: 1px solid #000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="smallPic" class="smallPic">
+    <img src="images/xiao.jpg" alt="">
+    <div class="zoom" id="zoom"></div>
+</div>
+<div id="bigPic" class="bigPic"></div>
+
+
+<script>
+    var smallPic = document.getElementById("smallPic");
+    var zoom = document.getElementById("zoom");
+    var bigPic = document.getElementById("bigPic");
+
+    smallPic.onmouseover = function() {
+        zoom.style.display = 'block';
+        bigPic.style.display = 'block';
+    };
+    smallPic.onmouseout = function() {
+        zoom.style.display = 'none';
+        bigPic.style.display = 'none';
+    };
+
+    smallPic.onmousemove = function (event) {
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+
+        var x = event.clientX - (getAllLeft(smallPic) - scrollLeft) - 87;
+        var y = event.clientY - (getAllTop(smallPic) - scrollTop) - 87;
+
+        if (x < 0) {
+            x = 0;
+        } else if(x > 175) {
+            x = 175;
+        }
+        if (y<0) {
+            y = 0;
+        } else if (y > 175) {
+            y = 175;
+        }
+        console.log(x, y);
+        zoom.style.left = x + 'px';
+        zoom.style.top = y + 'px';
+
+        var rate = 400 / 175;
+        bigPic.style.backgroundPosition = -x * rate + "px " + -y * rate + "px";
+    }
+
+    function getAllLeft(obj) {
+        var allLeft = obj.offsetLeft;
+        //当前正在算高度的元素
+        var currentObj = obj;
+        while (currentObj = currentObj.offsetParent) {
+            allLeft += currentObj.offsetLeft;
+        }
+        return allLeft;
+    }
+    function getAllTop(obj) {
+        var allTop = obj.offsetTop;
+        //当前正在算高度的元素
+        var currentObj = obj;
+        while (currentObj = currentObj.offsetParent) {
+            allTop += currentObj.offsetTop;
+        }
+        return allTop;
+    }
+</script>
+</body>
+</html>

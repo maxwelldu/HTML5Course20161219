@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            height: 3333px;
+
+        }
+        h1 {
+            position: fixed;
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+    <script type="text/javascript">
+        var h1 = document.getElementsByTagName("h1")[0];
+        window.onscroll = function() {
+            //高级浏览器认为卷动的值是body的
+            //IE6, 7, 8认为是html标签的属性
+//            h1.innerHTML = document.body.scrollTop;
+//            h1.innerHTML = document.documentElement.scrollTop;
+            h1.innerHTML = document.body.scrollTop || document.documentElement.scrollTop;
+        }
+    </script>
+</body>
+</html>

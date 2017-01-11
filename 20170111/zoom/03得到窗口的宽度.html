@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height:3000px;
+        }
+        h1 {
+            position: fixed;
+        }
+    </style>
+</head>
+<body>
+<h1></h1>
+<script>
+    var h1 = document.getElementsByTagName("h1")[0];
+
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    var h = document.documentElement.clientHeight || document.body.clientHeight;
+    h1.innerHTML = w + " " + h;
+
+</script>
+</body>
+</html>

@@ -35,6 +35,7 @@
 <h1 id="daojishi">50</h1>
 
 <audio src="images/c.wav" id="bomb"></audio>
+<audio src="images/bgm.mp3" autoplay></audio>
 
 <script>
     var ofenshu = document.getElementById("fenshu");
@@ -45,7 +46,7 @@
     var daojishi = 50;
 
     function Ballon() {
-        this.top = 400;
+        this.top = 700;
         this.left = Math.random() * 800;
         this.score = parseInt(Math.random() * 7) + 1;
 

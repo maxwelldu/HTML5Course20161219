@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box1 {
+            width: 500px;
+            height: 500px;
+            padding-top:300px;
+            background: yellowgreen;
+            position: relative;
+            overflow: hidden;
+        }
+        #box2 {
+            width: 300px;
+            height:300px;
+            padding-top: 100px;
+            background: skyblue;
+            position: relative;
+        }
+        #box3 {
+            width: 60px;
+            height: 60px;
+            background: purple;
+            padding-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1">
+        <div id="box2">
+            <div id="box3">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var box1 = document.getElementById("box1");
+        var box2 = document.getElementById("box2");
+        var box3 = document.getElementById("box3");
+
+        /*
+        console.log(box1.offsetTop);
+        console.log(box2.offsetTop);
+        console.log(box3.offsetTop);
+        */
+
+        //返回这个元素在页面中的净位置
+        //就是这个元素所有的offsetParent的offsetTop值的和
+        function getAllTop(obj) {
+            var allTop = obj.offsetTop;
+            //当前正在算高度的元素
+            var currentObj = obj;
+            while(currentObj = currentObj.offsetParent){
+                allTop += currentObj.offsetTop;
+            }
+            return allTop;
+        }
+        console.log(getAllTop(box1));
+        console.log(getAllTop(box2));
+        console.log(getAllTop(box3));
+    </script>
+</body>
+</html>
