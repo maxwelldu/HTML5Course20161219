@@ -1,0 +1,128 @@
+数据库
+关系型数据库
+    较大的 mysql, oracle, sqlserver, db2
+    迷你的 sqlite, access
+
+非关系型数据库
+    mongodb, redis, memcache
+
+安装环境 (wampserver, phpstudy, phpnow, xampp)
+下载，解压
+安装，安装的时候不要修改安装路径，修改的话不要放在中
+文目录下就行
+启动wampserver
+在浏览器里面输入 localhost，查看是否安装成功
+
+PHP入门
+从PHP开始，就真的步入“工程师”思维的培养上。我们要
+开始碰数据，学习后台工程师负责的内容，他们的日常工作
+是怎么样，从而更好学习Ajax，更好地认识前端和后台的交互
+
+PHP，不把你当小白了。科学性、工程性都有极大的提升。
+我们又是一个全新的开始
+
+1、认识PHP
+1.1 前台语言和后台语言的区别
+如果我们做的是一个HTML页面，我们知道HTML页面在哪里进行
+了渲染？
+请求一个HTML页面的流程：
+
+我们知道，上网实际上就是在请求文件，你输入 一个URL
+http://www.163.com/aaa/news/2016/1.html
+实际上在请求163的服务器上aaa文件夹中的news文件夹
+下的2016文件夹里面的1.html这个文件
+
+此时你的浏览器会向服务器发送一条HTTP请求。术语叫做
+HTTP Request，HTTP就是hypertext transfer protocal,
+超文本传输协议。
+
+服务器收到我们的HTTP请求之后，就会把请求的这个文件
+通过HTTP发给我们，术语叫做Http Response，HTTP响应。
+此时客户的计算机中将有传回来的1.html
+在客户的电脑里面，渲染这个html页面，该浮动的就浮动，
+有JS就支行JS。
+
+也就是说，执行js, html, css 都是在传输到客户电脑里面
+之后做的事情，我们就把他们叫做“前端语言”。
+
+PHP页面是怎么样的？
+<?php ?> 包含的语句就是PHP语句
+<script></script> 这个里面是写JS
+
+输出语句
+echo
+就是输出
+
+PHP（外文名：PHP：Hypertext Preprocessor, 中文 名：
+超文本预处理器)
+是一个运行在服务器上的语言，这个叫后端语言
+
+PHP是在服务器上执行的语言，服务器会把<?php ?>变成普通
+文本，将PHP页面变为html页面传给浏览器。浏览器就看不到
+PHP的源码
+
+前台语言：运行在客户端浏览器中。 HTML,CSS,JS
+后台语言：运行在服务器上。php, jsp, asp, python, ruby等
+
+1.2 PHP支行环境的安装
+php需要运行在服务器上，为了方便起见，我们把服务器搭建
+在我们本机，我们自己的计算机就变成了服务器。
+
+让一个计算机变为服务器，需要安装apache。还需要PHP的语言
+解析引擎。最好还要有数据库MySQL。最最好还要是Linux操作系统
+
+所以综合起来就是LAMP=Linux+apache+MySQL+PHP
+但是我们先不学Linux, 先用windows，所以就是WAMP
+WAMP = Windows + Apache + MySQL + PHP
+
+神奇的中国人发明了一键安装包，4合1
+比如，wampserver, phpstudy, phpnow, xampp
+也就是我们把这个软件安装完成，对应的apche, php, mysql就
+全部都安装好了
+
+2、PHP语言和HTML配合
+就是PHP语言是运行在服务器上的，
+<?php ?>
+可以放在任何地方，都会被在服务器执行，发回客户端的就是纯HTML
+
+所有的PHP文件都要放在
+c:\wamp\www
+文件夹里面。访问的时候，不要使用webstorm的打开方式，而是必须手动在浏览器中敲
+http://127.0.0.1
+这种路径访问
+
+PHP语言是侵入式语言，他是寄生在别的语言里面的，只要是
+<?php ?>
+都会在服务器上执行，然后变成纯HTML发回客户端
+
+想访问PHP页面，是不是每个用户都要装PHP程序？
+不用！只要我们服务器装了PHP解析引擎程序就行。因为服务器会把
+PHP变为纯HTML发给客户，客户不需要解析PHP的能力！
+
+PHP变量都要以$开头，可以是字母，数字，下划线，美元符号。但是紧跟$
+的不能是数字。
+不需要定义变量，就能使用。没有var
+
+<?php
+$a = 10;
+echo $a; //10
+?>
+
+循环语句，完全一样，记住不要var:
+<?php
+    for($i=0; $i<=100;$i++) {
+        echo $i."<br />";
+    }
+?>
+. 是连字符的意思
+
+for循环语句能够拆开：
+<?php
+for($i=0;$i<=100;$i++){
+?>
+    <div>内容<?php echo $i; ?></div>
+<?php
+}
+?>
+
+
