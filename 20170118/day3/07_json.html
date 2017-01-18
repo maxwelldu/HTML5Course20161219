@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="btn">点击加载出表中所有同学的信息</button>
+<script src="myajax.js"></script>
+<script>
+    document.getElementById("btn").onclick = function(){
+        myajax.get("07_php.php", {}, function(err, data){
+           if (err) {
+               console.log("加载失败");
+               return;
+           }
+            console.log(data);
+            var obj = JSON.parse(data);
+            console.log(obj);
+        });
+    }
+</script>
+</body>
+</html>
