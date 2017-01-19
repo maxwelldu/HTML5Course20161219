@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .tip{
+            display: none;
+        }
+        .wrong{
+            background-color: yellow;
+            color: red;
+        }
+        .correct{
+            background-color: greenyellow;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <p>请输入你的用户名：<input type="text" id="username"></p>
+    <p class="tip" id="tip"></p>
+    <script>
+        var username = document.getElementById("username");
+        var tip = document.getElementById("tip");
+        username.onblur = function(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.responseText === "y") {
+                        tip.style.display = "block";
+                        tip.className = "tip correct";
+                        tip.innerHTML = "恭喜，用户可以使用！";
+                    } else {
+                        tip.style.display = "block";
+                        tip.className = "tip wrong";
+                        tip.innerHTML = "非常抱歉，请使用其他用户名";
+                    }
+                }
+            };
+            xhr.open("get", "php/check.php?username="+username.value, true);
+            xhr.send(null);
+        };
+        username.onfocus = function(){
+            tip.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

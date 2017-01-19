@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        table, tr, td{
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+        .special {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <table id="table">
+        <tr>
+            <td>学号</td>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>性别</td>
+        </tr>
+    </table>
+
+    <!--在工程上，我们使用一个故意写错type的script标签存放模板-->
+    <script type="text/template" id="template">
+        <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{age}}</td>
+            <td>{{sex}}</td>
+        </tr>
+    </script>
+
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script>
+        //读取模板字符串
+        var templateString = $("#template").html();
+        //拿到数据
+        $.get("php/student.json", function(data){
+            for (var i = 0; i < data.length; i++) {
+                var dictionary = data[i];
+                //数据绑定
+                var DOMString = compile(templateString, dictionary);
+                //添加DOM
+                $("#table").append($(DOMString));
+            }
+        });
+
+        function compile(templateString, dictionary) {
+            return templateString.replace(/{{(\w+)}}/g, function(match, $1){
+                return dictionary[$1];
+            });
+        }
+    </script>
+
+
+</body>
+</html>

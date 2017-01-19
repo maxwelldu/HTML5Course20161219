@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1 id="title"></h1>
+<button id="btn">点击异步加载数据</button>
+<script>
+    var title = document.getElementById("title");
+    var btn = document.getElementById("btn");
+    btn.addEventListener("click", function(){
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+          if (xhr.readyState === 4) {
+              title.innerHTML = xhr.responseText;
+          }
+        };
+        xhr.open("POST", "php/do.php", true);
+        //如果用 post发送请求，那么必须加一句话，模拟成
+        //form表单提交
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+        xhr.send("username="+encodeURIComponent("志鹏")+"&age=18");
+    })
+</script>
+</body>
+</html>

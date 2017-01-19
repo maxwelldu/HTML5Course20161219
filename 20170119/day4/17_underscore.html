@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="http://www.css88.com/doc/underscore1.8.2/underscore.js"></script>
+<script>
+    var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var arr2 = _.shuffle(arr);
+    console.log(arr2);
+
+    var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+    var arr2 = _.sample(arr, 6);
+    console.log(arr2);
+
+    //我们自己也可以写产生随机样本的函数(非常难)
+    var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+    var result = [];
+    for (var i = 0; i < 6; i++) {
+        while(true) {
+            //随机的一个下标
+            var r = parseInt(Math.random() * 20);
+            for (var i = 0; i < result.length; i++) {
+                if (result[i] == arr[r]) {
+                    break;
+                }
+            }
+            if (i == result.length) {
+                break;
+            }
+        }
+       result.push(arr[r]);
+    }
+    console.log(result);
+
+    //each方法，迭代器
+    var arr = ["盼大神", "苗大神", "城大神", "旭大神"];
+    _.each(arr, function(item){
+        console.log(item);
+    });
+    //我们自己写一个 each方法
+    function each(array, fn) {
+        for (var i = 0; i < array.length; i++) {
+            fn(array[i]);
+        }
+    }
+    each(arr, function(v) {
+        console.log(v);
+    });
+
+//    filter方法
+    var arr = [
+        {
+            "id": 1,
+            "name": "志鹏",
+            "age": 18,
+            "sex": "男"
+        },
+        {
+            "id": 2,
+            "name": "晓旭",
+            "age": 19,
+            "sex": "男"
+        },
+        {
+            "id": 3,
+            "name": "灿城",
+            "age": 21,
+            "sex": "男"
+        }
+    ];
+    var result = _.filter(arr, function(item){
+       return item.age < 20;
+    });
+    console.log(result);
+
+    //contains方法
+    //检测数组中是否包含某项
+    var arr = ["韩大神", "盼大神", "苗大神", "城大神", "旭大神"];
+    var result = _.contains(arr, "韩大神");
+    console.log(result);
+
+    //最大值
+    var arr = [45, 232, 45, 324];
+    console.log(_.max(arr));
+    console.log(_.min(arr));
+
+    //特别的，可以返回一组对象数组中，按年龄的最小值
+    var arr = [
+        {
+            "id": 1,
+            "name": "志鹏",
+            "age": 18,
+            "sex": "男"
+        },
+        {
+            "id": 2,
+            "name": "晓旭",
+            "age": 19,
+            "sex": "男"
+        },
+        {
+            "id": 3,
+            "name": "灿城",
+            "age": 21,
+            "sex": "男"
+        }
+    ];
+    var result = _.min(arr, function(item){
+        return item.age;
+    });
+    console.log(result);
+    var result = _.max(arr, function(item){
+        return item.age;
+    });
+    console.log(result);
+
+    var result = _.min(arr, function(item){
+        return item.age;
+    });
+
+    //排序：
+    var arr = [
+        { "id": 1, "name": "志鹏", "age": 18, "sex": "男" },
+        { "id": 2, "name": "晓旭", "age": 28, "sex": "男" },
+        { "id": 2, "name": "晓旭", "age": 19, "sex": "男" },
+        { "id": 3, "name": "灿城", "age": 17, "sex": "男" }
+    ];
+    console.log(arr);
+    var result = _.sortBy(arr, function(item) {
+        return item.age;
+    });
+    console.log(result);
+
+    //统计是否成年
+    var arr = [
+        { "id": 1, "name": "志鹏", "age": 18, "sex": "男" },
+        { "id": 2, "name": "晓旭", "age": 28, "sex": "男" },
+        { "id": 2, "name": "晓旭", "age": 19, "sex": "男" },
+        { "id": 3, "name": "灿城", "age": 17, "sex": "男" }
+    ];
+    var result = _.countBy(arr, function(item){
+        if (item.age>=18) {
+            return "成年人";
+        } else {
+            return "未成年";
+        }
+    });
+    console.log(result);
+
+    //返回对象键的个数
+    var obj = {"a":undefined, "b":undefined, "c":undefined};
+    console.log(_.size(obj));
+
+    //删除指定项
+    var arr = ["东风", "幺鸡", "一条", "发财"];
+    arr = _.without(arr, "发财");
+    console.log(arr);
+
+    //合并数组并且去重
+    var arr = _.union([1,2,3], [2,3,4], [3,4,5]);
+    console.log(arr);
+
+    //寻找指定项
+    var arr = ["东风", "幺鸡", "一条", "发财"];
+    console.log(_.indexOf(arr, "一条"));
+
+    //_.template() 函数
+    //模板字符串
+    var str = "我是<%=name%>, 我<%=age%>岁了，我是<%=sex%>";
+    //得到一个函数，模板编译函数
+    var compiled = _.template(str);
+    //运行这个函数
+    var result = compiled({
+       "name": "魏大神",
+        "age": 3,
+        "sex": "保密"
+    });
+    console.log(result);
+
+
+</script>
+</body>
+</html>

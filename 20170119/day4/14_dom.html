@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    /**
+     * 当我们获取到JSON数据之后，需要修改DOM结构
+     * h1.innerHTML
+     * $("<li></li>").appendTo("ul");
+     * $("ul").html("<li></li>");
+     *
+     * var $li = $("<li></li>");
+     * $("<b></b>").html("我是标题").appendTo("li");
+     * $("<span></span>").html("我是作者").appendTo("li");
+     * $li.appendTo("ul");
+     * 换成字符串的方法
+     * $("ul")[0].innerHTML = "<li><b>我是标题</b><span>我是作者</span></li>";
+     * $("ul")[0].innerHTML += "<li><b>我是标题</b><span>我是作者</span></li>";
+     * $("ul")[0].innerHTML += "<li><b>我是标题</b><span>我是作者</span></li>";
+     *
+     * 在实际工作当中不会用这么low的方法，因为这些方法不能
+     * 胜任极度复杂情况。比如：
+     */
+</script>
+<div class="news">
+    <div class="pic">
+        <img src="images/1.jpg" alt="">
+    </div>
+    <div class="content">
+        <h3>标题</h3>
+        <div class="summary">摘要</div>
+        <div class="info">
+            <span class="author">小旭</span>
+            <span class="date">2017年1月19日</span>
+            <span class="readcount">阅读(100000+)</span>
+        </div>
+    </div>
+</div>
+
+<script>
+var str = "志鹏回家了，也不知道志鹏过的怎么样";
+//我们希望把志鹏换成其他同学
+console.log(str);
+/*
+str = str.replace("志鹏", "盼盼"); //这样只能替换第一个
+console.log(str);
+*/
+//str = str.replace(/志鹏/g, "盼盼");
+//console.log(str);
+
+str = str.replace(/志鹏/g, function(){
+    return "盼盼";
+});
+console.log(str);
+
+    //提出一个模板的概念
+    var str = "佳明租了一个~something~, 花了我~dollar~，我很~mood~";
+
+    //数据（也叫作：字典）
+    var dictionary = {
+      "something":"女朋友",
+        "dollar": 99800,
+        "mood": "开心 happy"
+    };
+
+    //数据绑定，就是把数据替换模板中的项。
+    str = str.replace(/~(\w+)~/g, function(match, $1){
+        console.log(match);
+        console.log("$1 = " + $1);
+        return dictionary[$1];
+    });
+    console.log(str);
+
+/**
+ * 模板思想：
+ * 模板字符串：就是含有~~, <%=%>, {{}}模板标记的字符串
+ * 数据（字典）：就是一个对象，用k,v的形式说明某个模板
+ * 标记的真实内容是什么
+ * 数据绑定：就是把字典的值替换到模板中的字符串中
+ */
+
+
+
+</script>
+
+
+</body>
+</html>

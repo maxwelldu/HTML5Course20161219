@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form id="form">
+    <p> 请输入姓名: <input type="text" name="username"> </p>
+    <p> 请输入性别:
+        <input type="radio" name="sex" value="1"> 男
+        <input type="radio" name="sex" value="2"> 女
+        <input type="radio" name="sex" value="3"> 保密
+    </p>
+    <p> 请选择国籍:
+        <input type="radio" name="nationality" value="1"> 中国
+        <input type="radio" name="nationality" value="2"> 外国
+    </p>
+    <p>
+        请选择省份：
+        <select name="hometown" >
+            <option value="beijing">北京</option>
+            <option value="shanghai">上海</option>
+            <option value="guangzhou">广州</option>
+            <option value="shenzhen">深圳</option>
+        </select>
+    </p>
+    <p> 请选择爱好:
+        <input type="checkbox" name="hobby" value="1"> 摄影
+        <input type="checkbox" name="hobby" value="2"> PHP
+        <input type="checkbox" name="hobby" value="3"> 健身
+        <input type="checkbox" name="hobby" value="4"> 吃饭
+        <input type="checkbox" name="hobby" value="5"> 睡觉
+        <input type="checkbox" name="hobby" value="6"> 打豆豆
+        <input type="checkbox" name="hobby" value="7"> 烫头
+    </p>
+    <p>
+        密码：
+        <input type="password" name="password">
+    </p>
+    <p>
+        留言：
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+    </p>
+    <p>
+        <input type="button" value="提交" id="btn">
+    </p>
+</form>
+<script>
+    var form = document.getElementById("form");
+    var btn = document.getElementById("btn");
+
+    btn.onclick = function(){
+      //得到表单元素里面的所有控件
+        var elems = form.elements;
+        //结果数组
+        var arr = [];
+        //遍历所有的控件
+        for (var i = 0; i < elems.length; i++) {
+            //当前遍历的小元素
+            var e = elems[i];
+            console.log(e);
+            console.log(e.type);
+            //分类讨论：
+            switch (e.type) {
+                //如果控件的类型是个按钮，那么没有任何返回值
+                case "button":
+                case "submit":
+                case "reset":
+                    break;
+                case "text":
+                case "textarea":
+                case "password":
+                    arr.push(e.name + "=" + e.value);
+                    break;
+                case "radio":
+                case "checkbox":
+                    e.checked && arr.push(e.name + "=" + e.value);
+                    break;
+                case "select-one":
+                    var options = e.getElementsByTagName("option");
+                    console.log(options);
+                    for (var j = 0; j < options.length; j++) {
+                        if (options[j].selected) {
+                            arr.push(e.name + "=" + options[j].value);
+                        }
+                    }
+                    break;
+            }
+        }
+        console.log(arr.join("&"));
+    };
+
+
+    /*
+    .elements;
+    e.type
+    e.name
+    e.value
+    放到数组里面
+    再转换成 k=v&k=v
+    */
+
+</script>
+</body>
+</html>

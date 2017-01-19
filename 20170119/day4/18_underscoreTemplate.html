@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        table, tr, td{
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+        .special {
+            background-color: skyblue;
+        }
+        .children {
+            background: green;
+        }
+    </style>
+</head>
+<body>
+<table id="table">
+    <tr>
+        <td>学号</td>
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>性别</td>
+    </tr>
+</table>
+
+<!--在工程上，我们使用一个故意写错type的script标签存放模板-->
+<script type="text/template" id="template">
+    <tr class='<%=className%>'>
+        <td><%=id%></td>
+        <td><%=name%></td>
+        <td><%=age%></td>
+        <td><%=sex%></td>
+    </tr>
+</script>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script src="http://www.css88.com/doc/underscore1.8.2/underscore.js"></script>
+<script>
+    //读取模板字符串
+    var templateString = $("#template").html();
+    //拿到数据
+    $.get("php/student.json", function(data){
+        _.each(data, function(dictionary){
+            //字典修正，根据字典中的一些项的情况，再设置一些项
+            dictionary.className = dictionary.age>19 ? "special" : "children";
+            //数据绑定
+            var compiled = _.template(templateString);
+            var DOMString = compiled(dictionary);
+            //添加DOM
+            $("#table").append($(DOMString));
+        })
+    });
+</script>
+
+
+</body>
+</html>

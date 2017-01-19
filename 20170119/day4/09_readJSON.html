@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1 id="title"></h1>
+<button id="btn">点击异步加载数据</button>
+<script>
+    var title = document.getElementById("title");
+    var btn = document.getElementById("btn");
+    btn.addEventListener("click", function(){
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState === 4) {
+                if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                    //把字符串转换成JSON对象
+                    //方法1，使用eval语句
+//                    var obj = eval("("+xhr.responseText+")");
+//                    console.log(obj);
+
+                    //方法2，使用new Function()的奇淫技巧
+//                    var obj = new Function("return " + xhr.responseText)();
+//                    console.log(obj);
+
+                    //方法3，使用内置对象JSON对象的parse方法
+                    var obj = JSON.parse(xhr.responseText);
+                    console.log(obj);
+                    title.innerHTML = xhr.responseText;
+                } else {
+                    title.innerHTML = "服务器错误，请稍后重试";
+                }
+            }
+        };
+        xhr.open("get", "php/app.json", true);
+        xhr.send(null);
+    })
+</script>
+</body>
+</html>

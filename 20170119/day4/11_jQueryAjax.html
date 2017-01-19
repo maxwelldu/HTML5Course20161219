@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1></h1>
+<button>按我</button>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script>
+    $("button").click(function(){
+        /*$.get("php/app.json", function(data){
+//            console.log(data.result[0].name);
+            var name = data.result[0].name;
+            $("h1").html(name);
+        });*/
+        $.ajax("php/app.json", {
+            "type": "get",
+            "data": {
+                "name":"maxwell"
+            },
+            "success": function(data){
+                console.log(data);
+            },
+            "error": function(XMLHttpRequest, textStatus, errorThrown){
+                console.log(errorThrown);
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form id="form">
+    <p> 请输入姓名: <input type="text" name="username"> </p>
+    <p> 请输入性别:
+        <input type="radio" name="sex" value="1"> 男
+        <input type="radio" name="sex" value="2"> 女
+        <input type="radio" name="sex" value="3"> 保密
+    </p>
+    <p> 请选择国籍:
+        <input type="radio" name="nationality" value="1"> 中国
+        <input type="radio" name="nationality" value="2"> 外国
+    </p>
+    <p>
+        请选择省份：
+        <select name="hometown" >
+            <option value="beijing">北京</option>
+            <option value="shanghai">上海</option>
+            <option value="guangzhou">广州</option>
+            <option value="shenzhen">深圳</option>
+        </select>
+    </p>
+    <p> 请选择爱好:
+        <input type="checkbox" name="hobby" value="1"> 摄影
+        <input type="checkbox" name="hobby" value="2"> PHP
+        <input type="checkbox" name="hobby" value="3"> 健身
+        <input type="checkbox" name="hobby" value="4"> 吃饭
+        <input type="checkbox" name="hobby" value="5"> 睡觉
+        <input type="checkbox" name="hobby" value="6"> 打豆豆
+        <input type="checkbox" name="hobby" value="7"> 烫头
+    </p>
+    <p>
+        密码：
+        <input type="password" name="password">
+    </p>
+    <p>
+        留言：
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+    </p>
+    <p>
+        <input type="button" value="提交" id="btn">
+    </p>
+</form>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script>
+    $("#btn").click(function () {
+        var str = $("#form").serialize();
+        console.log(str);
+        $.get("php/check.php?" + str, function(data){
+        });
+    });
+</script>
+</body>
+</html>

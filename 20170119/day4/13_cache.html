@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="点我" onclick="fun()">
+<script>
+    function fun() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState === 4) {
+                alert(xhr.responseText);
+            }
+        };
+        xhr.open("GET", "php/a.txt?a="+Math.random(), true);
+        xhr.send(null);
+    }
+
+</script>
+</body>
+</html>

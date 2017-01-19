@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1 id="title"></h1>
+<button id="btn">点击异步加载数据</button>
+<script>
+    var title = document.getElementById("title");
+    var btn = document.getElementById("btn");
+    btn.addEventListener("click", function(){
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState === 4) {
+                if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                    title.innerHTML = xhr.responseText;
+                } else {
+                    title.innerHTML = "服务器错误，请稍后重试";
+                }
+            }
+        };
+        xhr.open("get", "php/app.json", true);
+        xhr.send(null);
+    })
+</script>
+</body>
+</html>
