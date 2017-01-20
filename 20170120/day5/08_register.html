@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form id="form">
+    <input type="hidden" name="status" value="register">
+    用户名：<input type="text" name="userID">
+    密码：<input type="text" name="password">
+    <input type="button" id="btn" value="注册">
+</form>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script>
+    $("#btn").click(function() {
+        var userID = $("#form input[name=userID]").val();
+        var password = $("#form input[name=password]").val();
+        var register = $("#form input[name=status]").val();
+        var formData = {
+            "status": register,
+            "userID": userID,
+            "password": password
+        };
+        $.ajax({
+            "data": formData,
+            "url": "http://datainfo.duapp.com/shopdata/userinfo.php",
+            "method": "post",
+            "success": function(data) {
+                if (data === "1") {
+                    alert("注册成功");
+                } else if(data === "0") {
+                    alert("用户名已存在");
+                } else {
+                    alert("服务器异常");
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

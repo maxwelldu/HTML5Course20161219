@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <p>
+        <input type="text" id="mobile">
+        <input type="button" value="点击查询归属地" id="btn">
+    </p>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script>
+        $("#btn").click(function(){
+            var mobile = $("#mobile").val();
+            //正则验证
+            if (!/^[\d]{11}$/.test(mobile)) {
+                alert("不正确的手机号，请重新输入");
+                return;
+            }
+            $.get("php/shouji.php", {"mobile":mobile}, function(data){
+                console.log(data);
+                console.log(data.areaName, data.providerName);
+            });
+        });
+    </script>
+</body>
+</html>

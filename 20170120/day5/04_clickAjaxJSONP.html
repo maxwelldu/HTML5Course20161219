@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="按我" id="btn">
+
+<script>
+    function fun(data){
+        console.log(data);
+    }
+</script>
+<script>
+    //得到按钮
+    var btn = document.getElementById("btn");
+    //按钮监听
+    btn.onclick = function(){
+        //创建一个 script标签
+        var script = document.createElement("script");
+        //一个script标签如果没有src属性，将什么都不做
+        //一个script标签如果一旦设置了 src属性，那么将
+        //立即发出HTTP请求
+        script.src = "http://127.0.0.2/frontend/day5/jsonp.php?callback=fun";
+        //追加这个script标签
+        document.body.appendChild(script);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1></h1>
+<button>按我</button>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script>
+    $("button").click(function(){
+        $.get("http://127.0.0.2/frontend/day5/note.txt", function(data){
+            console.log(data);
+        })
+    });
+    /**
+     * css 可以加载不同域名下的内容
+     * link href
+     * js 可以加载不同域名下
+     * script src
+     * image 可以加载不同域名
+     * img src
+     *
+     */
+</script>
+
+</body>
+</html>

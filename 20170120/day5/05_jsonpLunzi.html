@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    jsonp("jsonp.js", "fun", function(data){
+           console.log(data);
+    });
+    //编写一个实用的轮子，以后弄jsonp的时候就方便了
+    function jsonp(URL, callbackname, callback) {
+        //在window对象上强行增加一个属性，这个属性就是
+//        全局变量，是一个函数的名字，值是一个函数
+        window[callbackname] = callback;
+        var script = document.createElement("script");
+        script.src = URL;
+        document.body.appendChild(script);
+    }
+</script>
+</body>
+</html>

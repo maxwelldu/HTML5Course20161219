@@ -1,0 +1,10 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: sks
+ * Date: 2017/1/20
+ * Time: 10:13
+ */
+$callback = $_GET['callback'];
+$obj = '{"stat":"ok","photos":{"page":8, "pages":37, "perpage":10, "total":"0", "photo":[{"id":"196", "owner":"", "subject":"唐雪见 荧荧烛火", "url":"13537773396926.jpg","tags":"唐雪见,新仙剑,人物,壁纸,美图,","like":"178","comment":"8","type":"1","height":"227"},{"id":"399", "owner":"", "subject":"十年之约", "url":"13553716879599.jpg","tags":"电视剧,仙剑奇侠传,李逍遥,赵灵儿,林月如,人物,同人,亦胡菲歌,","like":"178","comment":"14","type":"1","height":"173"},{"id":"98", "owner":"", "subject":"柳梦璃奏箜篌", "url":"13535698633021.jpg","tags":"柳梦璃,同人,伊吹五月,仙剑奇侠传四","like":"177","comment":"0","type":"1","height":"351"},{"id":"332", "owner":"", "subject":"侧面的英姿，我们的小紫英", "url":"13543788206529.jpg","tags":"慕容紫英,仙剑奇侠传四,人物,壁纸,百里悦鸣,","like":"177","comment":"3","type":"1","height":"428"},{"id":"164", "owner":"", "subject":"新仙剑高清人物壁纸-沈欺霜", "url":"13536925745410.jpg","tags":"新仙剑,沈欺霜,壁纸,人物,","like":"176","comment":"9","type":"1","height":"290"},{"id":"201", "owner":"", "subject":"为情所困的紫萱", "url":"13537781684188.jpg","tags":"紫萱,新仙剑,人物,壁纸,美图,","like":"175","comment":"10","type":"1","height":"217"},{"id":"75", "owner":"", "subject":"妖界之子：柳梦璃", "url":"13535656012227.jpg","tags":"柳梦璃,仙剑奇侠传四,同人,","like":"173","comment":"1","type":"1","height":"262"},{"id":"416", "owner":"", "subject":"为她流下心泪", "url":"13559688243916.png","tags":"林月如,人物,壁纸,美图,新仙剑,Truth,","like":"173","comment":"12","type":"1","height":"242"},{"id":"259", "owner":"", "subject":"那一刻的悲伤", "url":"13540009362891.jpg","tags":"仙剑奇侠传,赵灵儿,李逍遥,电视剧,剧照,胡歌,刘亦菲,人物,","like":"172","comment":"6","type":"1","height":"150"},{"id":"198", "owner":"", "subject":"可爱的小蛮 太可爱了", "url":"13537777416499.jpg","tags":"小蛮,新仙剑,人物,美图,壁纸,","like":"172","comment":"3","type":"1","height":"246"}]}}';
+echo $callback . "(" . $obj . ")";

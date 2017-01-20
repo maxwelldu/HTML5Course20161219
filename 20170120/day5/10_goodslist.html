@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script>
+        $.ajax({
+            "url": "http://datainfo.duapp.com/shopdata/getGoods.php",
+            "dataType": "jsonp",
+            "jsonpCallback": "callback",
+            "success": function(data) {
+                console.log(data);
+            }
+        });
+</script>
+
+</body>
+</html>
